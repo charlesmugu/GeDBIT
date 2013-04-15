@@ -82,7 +82,8 @@ public enum PivotSelectionMethods implements PivotSelectionMethod
             isCenter[firstPivot] = true;
 
             int[] indices; // offsets of the pivots in the original data list
-            if (2 > fftopt) //if fft == 2, then choose the third point got from FFT as the second povit
+            if (2 > fftopt) // if fft == 2, then choose the third point got from
+                            // FFT as the second povit
                 indices = new int[numPivots];
             else
                 indices = new int[numPivots + 1];
@@ -133,7 +134,8 @@ public enum PivotSelectionMethods implements PivotSelectionMethod
                 int[] result = new int[returnSize];
                 System.arraycopy(indices, 0, result, 0, returnSize);
                 return result;
-            } else if (2 > fftopt) //if fft == 2, then choose the third point got from FFT as the second povit
+            } else if (2 > fftopt) // if fft == 2, then choose the third point
+                                   // got from FFT as the second povit
                 return indices;
             else
             {
@@ -590,7 +592,7 @@ public enum PivotSelectionMethods implements PivotSelectionMethod
                     mat.viewDice());
         }
     },
-    COF
+    COV
     {
         int count;
 
@@ -603,12 +605,9 @@ public enum PivotSelectionMethods implements PivotSelectionMethod
         public int[] selectPivots(Metric metric,
                 List<? extends IndexObject> data, int numPivots)
         {
-            System.out.print("datasize: ");
-            System.out.println(data.size());
             if (count == 0 || data.size() > 10000)
             {
                 count = 1;
-                System.out.println("using FFT");
                 return FFT
                         .selectPivots(metric, data, 0, data.size(), numPivots);
             } else
@@ -630,10 +629,51 @@ public enum PivotSelectionMethods implements PivotSelectionMethod
             // compute the distance matrix
             DoubleMatrix2D matrix = GeDBIT.index.algorithms.LLE
                     .pairWiseDistance(metric, data);
-            return GeDBIT.index.algorithms.Cov.runCof(matrix, numPivots);
+            return GeDBIT.index.algorithms.Correlation
+                    .runCor(matrix, numPivots);
+
+        }
+    },
+    COR
+    {
+        int count;
+
+        /**
+         * @param metric
+         * @param data
+         * @param numPivots
+         * @return
+         */
+        public int[] selectPivots(Metric metric,
+                List<? extends IndexObject> data, int numPivots)
+        {
+            if (count == 0 || data.size() > 10000)
+            {
+                count = 1;
+                return FFT
+                        .selectPivots(metric, data, 0, data.size(), numPivots);
+            } else
+                return selectPivots(metric, data, 0, data.size(), numPivots);
+        }
+
+        /**
+         * @param metric
+         * @param data
+         * @param first
+         * @param dataSize
+         * @param numPivots
+         * @return
+         */
+        public int[] selectPivots(Metric metric,
+                List<? extends IndexObject> data, int first, int dataSize,
+                int numPivots)
+        {
+            // compute the distance matrix
+            DoubleMatrix2D matrix = GeDBIT.index.algorithms.LLE
+                    .pairWiseDistance(metric, data);
+            return GeDBIT.index.algorithms.Covariance.runCov(matrix, numPivots);
         }
     };
-
     public static int fftopt = 0;
 
 }

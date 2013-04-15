@@ -28,7 +28,7 @@ import cern.colt.matrix.linalg.Algebra;
 import cern.colt.matrix.linalg.EigenvalueDecomposition;
 
 /**
- * Do the Locally Linear Embedding(LLE), using the Colt library.
+ * Locally Linear Embedding(LLE), using the Colt library.
  * 
  * @author Ma Kewei
  * @version 2012.03.30
@@ -45,7 +45,6 @@ public class LLE {
 	 * @param number of pivots
 	 * @return matrix of eigenvector
 	 */
-	
 	public static DoubleMatrix2D runLLE(DoubleMatrix2D matrix, int numP) {
 	final int d = numP;    //number of pivots, also the output dimension	
 	    final int k = 18;	//number of nearest neighbors

@@ -81,7 +81,7 @@ $(document).ready(function(){
 				<p>在这里进行向量的搜索..格式 <strong style="font-size:18px;color:#f87a7a">x,y,z,radian</strong> </p>
 			</div>
 			
-			<form class="" id="" action="dim.action" style="position:relative;text-align:left;margin-left:50px">
+			<form class="" id="" action="vector.action" style="position:relative;text-align:left;margin-left:50px">
 				<input type="text" name="xyz" value="2,2,2,0.2" style="border-bottom-left-radius:3px;border-top-left-radius:3px;border:0px solid #000;padding-left:10px;width:400px;height:35px;font-size:16px;border:none;vertical-align:middle"/><input type="submit" value="搜索" style="cursor:pointer;border-bottom-right-radius:3px;border-top-right-radius:3px;border:0px solid #000;vertical-align:middle;width:130px;height:37px;font-size:22px;font-weight:600;background:#81B74D;color:white" />
 			</form>
 		</div>

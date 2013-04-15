@@ -3,19 +3,19 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"  
     "http://struts.apache.org/dtds/struts-2.0.dtd">  
       
-    <struts>  
-     <package name="package" extends="json-default">
+<struts>  
+ 	<package name="package" extends="json-default">
      
-     	<action  name="dna"  class="GeDBIT.web.DnaAction" >  
-            <result  name="success">/dna.jsp</result>
-        </action>
+		<action  name="dna"  class="GeDBIT.web.DnaAction" >  
+			<result  name="success">/dna.jsp</result>
+		</action>
         
-        <action  name="protein"  class="GeDBIT.web.ProAction" >  
-            <result  name="success">/protein.jsp</result>
-        </action>
+		<action  name="protein"  class="GeDBIT.web.ProAction" >  
+			<result  name="success">/protein.jsp</result>
+		</action>
         
-        <action  name="dim"  class="GeDBIT.web.DimAction" >  
-            <result  name="success">/dimension.jsp</result>
-        </action>
+		<action  name="vector"  class="GeDBIT.web.VectorAction" >  
+			<result  name="success">/vector.jsp</result>
+		</action>
     </package> 
-    </struts>  
+</struts>  
