@@ -6,11 +6,11 @@
 <struts>  
  	<package name="package" extends="json-default">
      
-		<action  name="dna"  class="GeDBIT.web.DnaAction" >  
+		<action  name="dna"  class="GeDBIT.web.DNAAction" >  
 			<result  name="success">/dna.jsp</result>
 		</action>
         
-		<action  name="protein"  class="GeDBIT.web.ProAction" >  
+		<action  name="protein"  class="GeDBIT.web.ProteinAction" >  
 			<result  name="success">/protein.jsp</result>
 		</action>
         

@@ -28,7 +28,6 @@ public class DNAQuery
 
         TableManager tm = TableManager.getTableManager(indexName);
         Table dataTable = tm.getTable(indexName);
-        tm.close();
         Index index;
         if (dataTable != null)
             index = dataTable.getIndex();

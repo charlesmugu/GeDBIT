@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
-public class DnaAction extends ActionSupport {
+public class DNAAction extends ActionSupport {
 	private String dnastr; //输入DNA串
 	private Map<String,String> result=new LinkedHashMap<String,String>();   //用于JSP显示
 	private String resdna="";//返回的总串
@@ -122,7 +122,6 @@ public class DnaAction extends ActionSupport {
 					 }
 				 }
 				 catch (IOException e1) {
-						// TODO Auto-generated catch block
 						System.out.println("Writer Error");
 						e1.printStackTrace();
 						
@@ -159,7 +158,7 @@ public class DnaAction extends ActionSupport {
 				 while((lineTxt=buffreader.readLine())!=null)
 				 {
 					 Matcher matcher=patt.matcher(lineTxt);
-					 System.out.println("OPEN OK");
+					 //System.out.println("OPEN OK");
 					 while(matcher.find())
 					 {
 						 res=matcher.group().toString().replaceFirst("fragment: ","");
@@ -169,13 +168,13 @@ public class DnaAction extends ActionSupport {
 							 result.put(String.valueOf(count), res);
 						 }
 							
-						 System.out.println(res);
+						 //System.out.println(res);
 						 ++count;
 					 }
 				 }
 				 allpage=((count-1)/evpg)-1;
-				 System.out.println(page);
-				 System.out.println(allpage);
+				 //System.out.println(page);
+				 //System.out.println(allpage);
 				 dnanum=count-1;
 				 buffreader.close();
 				 read.close();
