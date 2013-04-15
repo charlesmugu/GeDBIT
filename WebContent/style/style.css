@@ -1,0 +1,263 @@
+/*基本信息*/
+body 
+{
+font:12px Tahoma;
+margin:0px;
+text-align:center;
+background:url('../image/bg.gif');
+}
+
+#container
+{
+height:650px;
+margin:0px auto;
+padding:0px;
+}
+
+#container .header
+{
+width:100%;
+margin:0px;
+padding:0px;
+height:150px;
+background:#EAEFEE;
+}
+
+#container .header .row
+{
+width:100%;
+margin:0px;
+padding:0px;
+height:100px;
+}
+
+#container .header .left
+{
+float:left;
+position:relative;
+width:400px;
+padding:0px;
+height:150px;
+left:100px;
+}
+
+#container .header .left .til
+{
+padding-top:20px;
+padding-left:20px;
+}
+
+#container .header .right
+{
+float:left;
+position:relative;
+width:400px;
+margin:0px;
+padding:0px;
+height:150px;
+right:-40%;
+
+}
+#container .header .right .but_vector
+{
+margin-top:30px;
+float:left;
+height:76px;
+width:76px;
+border-radius:100px;
+background:#54B9C7;
+position:relative;
+cursor:pointer;
+margin-left:40px;
+}
+
+#container .header .right .but_dna
+{
+margin-top:30px;
+float:left;
+height:76px;
+width:76px;
+border-radius:100px;
+position:relative;
+margin-left:40px;
+background:#1F292D;
+cursor:pointer;
+}
+
+#container .header .right .but_pro
+{
+margin-top:30px;
+float:left;
+height:76px;
+width:76px;
+border-radius:100px;
+position:relative;
+margin-left:40px;
+background:#1F292D;
+cursor:pointer;
+}
+
+#container .header .right .pointer
+{
+margin-bottom:0px;
+right:288px;
+margin-top:138px;
+float:left;
+height:12px;
+width:31px;
+position:relative;
+background:transparent url('../image/pointer.png') no-repeat left top;
+}
+
+#container .content
+{
+width:100%;
+margin:0px;
+padding:0px;
+height:400px;
+background:#1F292D;
+}
+
+#container .content .vector_left
+{
+float:left;
+width:35%;
+margin:0px;
+padding:0px;
+height:100%;
+background:#638CD6;
+position:relative;
+}
+
+#container .content .vector_right
+{
+float:left;
+width:65%;
+margin:0px;
+padding:0px;
+height:100%;
+position:relative;
+background:#1F292D;
+}
+
+.lab
+{
+color:white;
+margin-top:50px;
+margin-left:50px;
+height:150px;
+width:200px;
+}
+
+h1
+{
+text-align:left;
+height:20px;
+}
+
+p
+{
+text-align:left;
+
+}
+
+#container .content .dna_left
+{
+float:left;
+width:35%;
+margin:0px;
+padding:0px;
+height:100%;
+background:#638CD6;
+position:relative;
+display:none;
+}
+
+#container .content .dna_right
+{
+float:left;
+width:65%;
+margin:0px;
+padding:0px;
+height:100%;
+position:relative;
+background:#1F292D;
+display:none;
+}
+
+
+#container .content .pro_left
+{
+display:none;
+float:left;
+width:35%;
+margin:0px;
+padding:0px;
+height:100%;
+background:#638CD6;
+position:relative;
+}
+
+#container .content .pro_right
+{
+display:none;
+float:left;
+width:65%;
+margin:0px;
+padding:0px;
+height:100%;
+position:relative;
+background:#1F292D;
+}
+
+.spro_right .lab
+{
+color:white;
+margin-top:50px;
+margin-left:50px;
+height:70px;
+width:200px;
+}
+.pro_right .pickpic
+{
+margin:0 auto;
+border-radius:2px;
+width:738px;
+height:270px;
+position:relative;
+}
+
+.pickpic ul
+{
+margin:0 auto;
+padding-left:0px;
+margin-top:10px;
+position:relative;
+}
+.pickpic ul li
+{
+list-style-type:none;
+float:left;
+height:105px;
+width:180px;
+position:relative;
+margin-top:20px;
+cursor:pointer;
+}
+
+.pickpic img
+{
+border:0;
+padding:2% 2% 2% 2%;
+max-height:100px;
+max-width:140px;
+position:relative;
+/*border:2px solid #ffffff;*/
+border-radius:5px;
+
+}
+
+.pickpic img:hover
+{
+	background:url('../image/gs.gif') no-repeat;
+}

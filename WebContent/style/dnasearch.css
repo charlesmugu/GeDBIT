@@ -1,0 +1,108 @@
+
+#dna_search_summary_header {
+    height: 180px;
+    position: relative;
+    text-indent: -999999px;
+    width: 960px;
+    z-index: 50;
+}
+
+#dna_search_summary #dna_search_summary_details {
+    background-color: #F8F8F8;
+    border: 1px solid #CFCFCF;
+    border-radius: 10px 10px 10px 10px;
+    margin: 50px 0 20px;
+    min-height: 172px;
+    padding: 20px;
+    position: relative;
+}
+
+#dna_search_summary_details_word{
+	margin-left:60px;
+}
+
+#dna_search_summary_details_word p strong{
+	color:red;
+}
+
+#dna_search_summary_details_img{
+	margin-left:100px;
+}
+
+.dna_img_item{
+	width:600px;
+	height:90px;
+	border:2px solid #bdd9c4;
+	/*background:#bdd9c4;*/
+	border-radius:10px;
+	padding-top:10px;
+	padding-left:30px;
+	overflow:auto;
+	white-space:nowrap;
+	overflow-y:hidden;
+}
+
+.dna_img_item li{
+	display:inline;
+
+}
+
+.dna_img_item img{
+	width:20px;
+	height:60px;
+	margin-left:5px;
+	display:inline;
+}
+
+.dna_img_item #dna_last_item{
+	margin-right:40px;
+}
+
+#dna_search_results ul li{
+	display:inline;
+}
+
+.dna_search_results_list{
+	margin-top:25px;
+	border-bottom: 1px dashed #CDCDCD;
+	margin-bottom:100px;
+	background-color: #f8f8f8;
+	border: 1px solid #CDCDCD;
+	border-radius: 10px 10px 10px 10px;
+	padding: 20px 20px;
+}
+
+.dna_search_results_item{
+	border-top: 1px dashed #CDCDCD;
+    padding-top:30px;
+	padding-bottom:30px;
+}
+
+.dna_search_results_item_details{
+	margin:0 0 0 50px;
+	
+}
+
+.dna_search_results_item_details strong{
+	color:red;
+}
+
+.dna_search_results_item_img{
+	margin:0 0 0 100px;
+}
+
+.dna_search_results_updown{
+	padding:10px 50px;
+	border-top:1px dashed #CDCDCD;
+	text-align:right;
+}
+.dna_search_results_updown span{
+	margin: 0 5px;
+}
+
+.t_a
+{
+height:101;
+width:33px;
+background:url("../image/dna_t.png") no-repeat;
+}

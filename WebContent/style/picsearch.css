@@ -1,0 +1,126 @@
+#pic_search_bar {
+    background-color: #F8F8F8;
+    border-bottom: 1px solid #CFCFCF;
+    padding: 5px 0;
+	height:35px;
+}
+
+#pic_search_form{
+	margin-left:480px;
+	margin-top:4px;
+}
+
+/*#pic_search_summary, #pic_search_results {
+    background-color: #FFFFFF;
+}*/
+
+#pic_search_summary_header {
+    height: 180px;
+    position: relative;
+    text-indent: -999999px;
+    width: 960px;
+    z-index: 50;
+}
+
+#pic_search_summary #pic_search_summary_details {
+    background-color: #F8F8F8;
+    border: 1px solid #CFCFCF;
+    border-radius: 10px 10px 10px 10px;
+    margin: 50px 0 20px;
+    min-height: 258px;
+    padding: 20px;
+    position: relative;
+}
+
+#pic_search_summary_details_word{
+	margin-left:220px;
+}
+
+#pic_search_summary #pic_search_summary_details #pic_search_summary_details_img{
+    float: left;
+    width: 200px;
+}
+
+.img_thumbs {
+    display: block;
+    margin: 0;
+    padding: 0 0 10px;
+    position: relative;
+    text-align: center;
+    width: 150px;
+}
+
+#pic_search_summary #pic_search_summary_details #pic_search_summary_details_img
+.img_thumbs img{
+	border: 1px solid #BDC9D6;
+    border-radius: 10px 10px 10px 10px;
+    padding: 5px;
+    position: relative;
+    z-index: 1;
+}
+
+.img_thumbs a img{
+	border: 1px solid #BDC9D6;
+    border-radius: 10px 10px 10px 10px;
+    padding: 5px;
+	max-width:180px;
+	max-height:200px;
+    position: relative;
+    z-index: 1;
+}
+
+#pic_search_results ul li{
+	display:inline;
+}
+
+.pic_search_results_list{
+	margin-top:25px;
+	border-bottom: 1px dashed #CDCDCD;
+	margin-bottom:100px;
+	background-color: #f8f8f8;
+	border: 1px solid #CDCDCD;
+	border-radius: 10px 10px 10px 10px;
+	padding: 20px 20px;
+}
+
+.pic_search_results_item{
+	border-top: 1px dashed #CDCDCD;
+    padding: 30px 20px 0 0;
+}
+
+.pic_search_results_item_image{
+	width:200px;
+	color: #777777;
+    float: left;
+    text-align: center;
+	margin-left:20px;
+}
+
+.pic_search_results_item_details{
+	margin-left:280px;
+	color: #777777;
+	margin-top:15px;
+	font-size:15px;
+}
+
+.pic_search_results_item_details span{
+	line-height:26px;
+}
+
+.pic_search_results_item_details span strong{
+	color:#000000;
+}
+
+.pic_search_results_updown{
+	padding:10px 50px;
+	border-top:1px dashed #CDCDCD;
+	text-align:right;
+}
+.pic_search_results_updown span{
+	margin: 0 5px;
+}
+
+.zoomshow
+{
+max-height:450px;max-width:450px
+}

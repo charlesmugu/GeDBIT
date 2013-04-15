@@ -1,0 +1,92 @@
+#dim_search_summary_header {
+    height: 180px;
+    position: relative;
+    text-indent: -999999px;
+    width: 960px;
+    z-index: 50;
+}
+
+#dim_search_summary #dim_search_summary_details {
+    background-color: #F8F8F8;
+    border: 1px solid #CFCFCF;
+    border-radius: 10px 10px 10px 10px;
+    margin: 50px 0 20px;
+    min-height: 172px;
+    padding: 20px;
+    position: relative;
+}
+
+#dim_search_summary #dim_search_summary_details #dim_search_summary_details_img{
+    float: left;
+    width: 200px;
+}
+
+#dim_search_results ul li{
+	display:inline;
+}
+
+.dim_search_results_list{
+	margin-top:25px;
+	border-bottom: 1px dashed #CDCDCD;
+	margin-bottom:100px;
+	background-color: #f8f8f8;
+	border: 1px solid #CDCDCD;
+	border-radius: 10px 10px 10px 10px;
+	padding: 20px 20px;
+}
+
+.dim_search_results_item{
+	border-top: 1px dashed #CDCDCD;
+	border-bottom: 1px dashed #CDCDCD;
+    padding: 30px 20px 30px 20px;
+}
+
+.dim_search_results_item_details{
+	margin-left:px;
+	line-height:30px;
+	border:1px solid #8273ff;
+	border-radius:10px;
+	width:200px;
+	float:left;
+}
+
+.dim_search_results_item_details span{
+	font-size:30px;
+	color:blue;
+	margin-left:10px;
+}
+
+.dim_search_results_item_details p{
+	margin-left:10px;
+}
+
+
+.dim_search_results_item_details .resu{
+	color:red;
+	margin-left:30px;
+}
+
+
+.dim_search_results_updown{
+	padding:10px 50px;
+	border-top:1px dashed #CDCDCD;
+	text-align:right;
+}
+.dim_search_results_updown span{
+	margin: 0 5px;
+}
+
+.dim_canvas{
+	width:362px;
+	height:510px;
+	margin:0 0 0 350px;
+}
+#tips{
+font-size:10px;
+height:100px;
+width:110px;
+border:1px dashed #CDCDCD;
+float:left;
+margin-left:20px;
+}
+
