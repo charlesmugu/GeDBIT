@@ -2,21 +2,21 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/colt.jar"/>
-	<classpathentry kind="lib" path="lib/commons-fileupload-1.2.2.jar"/>
-	<classpathentry kind="lib" path="lib/commons-io-2.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-lang3-3.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.0.4.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/freemarker-2.3.19.jar"/>
-	<classpathentry kind="lib" path="lib/hadoop-core-0.20.2-cdh3u4.jar"/>
-	<classpathentry kind="lib" path="lib/javassist-3.11.0.GA.jar"/>
-	<classpathentry kind="lib" path="lib/jdom-2.0.2.jar"/>
-	<classpathentry kind="lib" path="lib/mdsj.jar"/>
-	<classpathentry kind="lib" path="lib/ognl-3.0.5.jar"/>
-	<classpathentry kind="lib" path="lib/postgresql-9.1-902.jdbc4.jar"/>
-	<classpathentry kind="lib" path="lib/struts2-core-2.3.4.jar"/>
-	<classpathentry kind="lib" path="lib/struts2-json-plugin-2.3.4.jar"/>
-	<classpathentry kind="lib" path="lib/xwork-core-2.3.4.jar"/>
-	<classpathentry kind="output" path="build/classes"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/colt.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/commons-io-2.0.1.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/freemarker-2.3.19.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/hadoop-core-0.20.2-cdh3u4.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/javassist-3.11.0.GA.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/jdom-2.0.2.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/mdsj.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/ognl-3.0.5.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/postgresql-9.1-902.jdbc4.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/struts2-core-2.3.4.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/struts2-json-plugin-2.3.4.jar"/>
+	<classpathentry kind="lib" path="search/WEB-INF/lib/xwork-core-2.3.4.jar"/>
+	<classpathentry kind="output" path="search/WEB-INF/classes"/>
 </classpath>
