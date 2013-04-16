@@ -4,7 +4,7 @@
  * Copyright Information:
  * 
  * Change Log:
- * 2012.03.30: Added by Ma Kewei
+ * 2012.03.30: Added by Kewei Ma
  */
 package GeDBIT.index.algorithms;
 
@@ -30,7 +30,7 @@ import cern.colt.matrix.linalg.EigenvalueDecomposition;
 /**
  * Locally Linear Embedding(LLE), using the Colt library.
  * 
- * @author Ma Kewei
+ * @author Kewei Ma
  * @version 2012.03.30
  */
 
