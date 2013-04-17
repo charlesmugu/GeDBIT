@@ -19,7 +19,7 @@ import GeDBIT.index.InternalNode;
 public class PartitionResults {
 
     private List<List<? extends IndexObject>> listOfPartitions;
-    private InternalNode                      iNode;
+    private InternalNode iNode;
 
     @SuppressWarnings("unused")
     private PartitionResults() {
@@ -29,47 +29,51 @@ public class PartitionResults {
      * @param subDataList
      * @param iNode
      */
-    public PartitionResults(List<List<? extends IndexObject>> subDataList, InternalNode iNode) {
-        this.listOfPartitions = subDataList;
-        this.iNode = iNode;
+    public PartitionResults(List<List<? extends IndexObject>> subDataList,
+	    InternalNode iNode) {
+	this.listOfPartitions = subDataList;
+	this.iNode = iNode;
     }
 
     /**
      * @return the number of partitions
      */
     public int size() {
-        return listOfPartitions.size();
+	return listOfPartitions.size();
     }
 
     /**
      * @param partition
      */
     public void addPartition(List<IndexObject> partition) {
-        listOfPartitions.add(partition);
+	listOfPartitions.add(partition);
     }
 
     /**
      * @param iNode
      */
     public void setNode(InternalNode iNode) {
-        this.iNode = iNode;
+	this.iNode = iNode;
     }
 
     /**
      * @param index
-     * @return the partition at the given index (a partition is a {@link List} of {@link IndexObject}s
+     * @return the partition at the given index (a partition is a {@link List}
+     *         of {@link IndexObject}s
      * @throws IndexOutOfBoundsException
      */
-    public List<? extends IndexObject> getPartition(int index) throws IndexOutOfBoundsException {
-        return listOfPartitions.get(index);
+    public List<? extends IndexObject> getPartition(int index)
+	    throws IndexOutOfBoundsException {
+	return listOfPartitions.get(index);
     }
 
     /**
      * TODO javadoc
-     * @return 
+     * 
+     * @return
      */
     public InternalNode getInternalNode() {
-        return iNode;
+	return iNode;
     }
 
 }

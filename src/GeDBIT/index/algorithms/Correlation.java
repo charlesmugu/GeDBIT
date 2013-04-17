@@ -28,7 +28,7 @@ public class Correlation {
 	boolean isChosen[] = new boolean[matrix.rows()];
 	// correlation matrix
 	DoubleMatrix2D coMatrix = Statistic.covariance(matrix);
-	
+
 	// choose the first pivot with largest variance
 	for (int i = 1; i < coMatrix.rows(); i++) {
 	    if (coMatrix.get(i, i) > coMatrix.get(result[0], result[0])) {
@@ -37,7 +37,7 @@ public class Correlation {
 	}
 	// set it true
 	isChosen[result[0]] = true;
-	
+
 	// select rest pivots
 	if (numP > 1) {
 	    Statistic.correlation(coMatrix);
@@ -57,7 +57,7 @@ public class Correlation {
 			}
 		    }
 		}
-		
+
 		// pick largest ones as pivots
 		int index = 0;
 		for (int j = 1; j < minCorIndics.length; j++) {

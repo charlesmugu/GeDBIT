@@ -77,166 +77,162 @@ import GeDBIT.index.VPIndex; //for javadoc
  * @version 2007.07.12
  */
 
-public class BuildVPIndex
-{
+public class BuildVPIndex {
 
     /**
      * @param args
      */
-    public static void main(String[] args)
-    {
-        int pNum = 3;
-        int sf = 3;
-        int mls = 100;
-        int initialSize = 100000;
-        int finalSize = 1000000;
-        int stepSize = 100000;
-        Level debug = Level.OFF;
-        int pathLength = 0;
-        PartitionMethod dpm = PartitionMethods.valueOf("BALANCED");
-        PivotSelectionMethod psm = PivotSelectionMethods.valueOf("FFT");
-        int frag = 6;
-        int dim = 2;
-        boolean bucket = true;
-        double maxR = 0.1;
+    public static void main(String[] args) {
+	int pNum = 3;
+	int sf = 3;
+	int mls = 100;
+	int initialSize = 100000;
+	int finalSize = 1000000;
+	int stepSize = 100000;
+	Level debug = Level.OFF;
+	int pathLength = 0;
+	PartitionMethod dpm = PartitionMethods.valueOf("BALANCED");
+	PivotSelectionMethod psm = PivotSelectionMethods.valueOf("FFT");
+	int frag = 6;
+	int dim = 2;
+	boolean bucket = true;
+	double maxR = 0.1;
 
-        int setA = 10000;
-        int setN = 50;
-        int fftScale = 100;
-        String indexPrefix = "vpindex";
-        //final String indexExtName = ".index";
-        String fileName = "1m.vector";
-        String dataType = "vector";
-        String psmName = "";
-        String forPrint = "";
+	int setA = 10000;
+	int setN = 50;
+	int fftScale = 100;
+	String indexPrefix = "vpindex";
+	// final String indexExtName = ".index";
+	String fileName = "1m.vector";
+	String dataType = "vector";
+	String psmName = "";
+	String forPrint = "";
 
-        String selectAlgorithm = "";
-        String testKind = "";
-        String yMethod = "";
-        
-        for (int i = 0; i < args.length; i = i + 2)
-        {
-            if (args[i].equalsIgnoreCase("-n"))
-                fileName = args[i + 1];
+	String selectAlgorithm = "";
+	String testKind = "";
+	String yMethod = "";
 
-            else if (args[i].equalsIgnoreCase("-forprint"))
-                forPrint += args[i + 1] + ", ";
+	for (int i = 0; i < args.length; i = i + 2) {
+	    if (args[i].equalsIgnoreCase("-n"))
+		fileName = args[i + 1];
 
-            else if (args[i].equalsIgnoreCase("-v"))
-                pNum = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-forprint"))
+		forPrint += args[i + 1] + ", ";
 
-            else if (args[i].equalsIgnoreCase("-seta"))
-                setA = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-v"))
+		pNum = Integer.parseInt(args[i + 1]);
 
-            else if (args[i].equalsIgnoreCase("-setn"))
-                setN = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-seta"))
+		setA = Integer.parseInt(args[i + 1]);
 
-            else if (args[i].equalsIgnoreCase("-f"))
-                sf = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-setn"))
+		setN = Integer.parseInt(args[i + 1]);
 
-            else if (args[i].equalsIgnoreCase("-fftscale"))
-                fftScale = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-f"))
+		sf = Integer.parseInt(args[i + 1]);
 
-            else if (args[i].equalsIgnoreCase("-pl"))
-                pathLength = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-fftscale"))
+		fftScale = Integer.parseInt(args[i + 1]);
 
-            else if (args[i].equalsIgnoreCase("-psm"))
-            {
-                psmName = args[i + 1];
-            }
+	    else if (args[i].equalsIgnoreCase("-pl"))
+		pathLength = Integer.parseInt(args[i + 1]);
 
-            else if (args[i].equalsIgnoreCase("-dpm"))
-            {
-                dpm = PartitionMethods.valueOf(args[i + 1].toUpperCase());
-                PartitionMethods.pm = args[i + 1].toUpperCase();
-            }
+	    else if (args[i].equalsIgnoreCase("-psm")) {
+		psmName = args[i + 1];
+	    }
 
-            else if (args[i].equalsIgnoreCase("-m"))
-                mls = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-dpm")) {
+		dpm = PartitionMethods.valueOf(args[i + 1].toUpperCase());
+		PartitionMethods.pm = args[i + 1].toUpperCase();
+	    }
 
-            else if (args[i].equalsIgnoreCase("-o"))
-                indexPrefix = args[i + 1];
+	    else if (args[i].equalsIgnoreCase("-m"))
+		mls = Integer.parseInt(args[i + 1]);
 
-            else if (args[i].equalsIgnoreCase("-t"))
-                dataType = args[i + 1];
+	    else if (args[i].equalsIgnoreCase("-o"))
+		indexPrefix = args[i + 1];
 
-            else if (args[i].equalsIgnoreCase("-i"))
-                initialSize = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-t"))
+		dataType = args[i + 1];
 
-            else if (args[i].equalsIgnoreCase("-a"))
-                finalSize = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-i"))
+		initialSize = Integer.parseInt(args[i + 1]);
 
-            else if (args[i].equalsIgnoreCase("-s"))
-                stepSize = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-a"))
+		finalSize = Integer.parseInt(args[i + 1]);
 
-            else if (args[i].equalsIgnoreCase("-b"))
-                bucket = (Integer.parseInt(args[i + 1]) == 1);
+	    else if (args[i].equalsIgnoreCase("-s"))
+		stepSize = Integer.parseInt(args[i + 1]);
 
-            else if (args[i].equalsIgnoreCase("-frag"))
-                frag = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-b"))
+		bucket = (Integer.parseInt(args[i + 1]) == 1);
 
-            else if (args[i].equalsIgnoreCase("-dim"))
-                dim = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-frag"))
+		frag = Integer.parseInt(args[i + 1]);
 
-            else if (args[i].equalsIgnoreCase("-r")){
-                maxR = Double.parseDouble(args[i + 1]);
-                PartitionMethods.r = Double.parseDouble(args[i + 1]);
-                }
+	    else if (args[i].equalsIgnoreCase("-dim"))
+		dim = Integer.parseInt(args[i + 1]);
 
-            else if (args[i].equalsIgnoreCase("-g"))
-                debug = Level.parse(args[i + 1]);
-            
-            else if (args[i].equalsIgnoreCase("-sa"))
-                selectAlgorithm = args[i+1];
-            
-            else if (args[i].equalsIgnoreCase("-ym"))
-                yMethod = args[i+1];
-            
-            else if (args[i].equalsIgnoreCase("-tkind"))
-                testKind = args[i+1];
-            else if (args[i].equalsIgnoreCase("-fftopt"))
-                PivotSelectionMethods.fftopt = Integer.parseInt(args[i+1]);
-            else if (args[i].equalsIgnoreCase("-rn"))
-                PartitionMethods.countRN = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-r")) {
+		maxR = Double.parseDouble(args[i + 1]);
+		PartitionMethods.r = Double.parseDouble(args[i + 1]);
+	    }
 
-            else
-                throw new IllegalArgumentException("Invalid option " + args[i]);
-        }
+	    else if (args[i].equalsIgnoreCase("-g"))
+		debug = Level.parse(args[i + 1]);
 
-        dpm.setMaxRadius(maxR);
-        
-        //hack, if cght, use clustering partition, and set maxr to -1 to denote it
-        if (dpm == PartitionMethods.CGHT)
-        {
-            dpm = PartitionMethods.CLUSTERINGKMEANS;
-            dpm.setMaxRadius(-2);
-        }
-        if (dpm == PartitionMethods.GHT)
-        {
-            dpm = PartitionMethods.CLUSTERINGKMEANS;
-            dpm.setMaxRadius(-1);
-        }
+	    else if (args[i].equalsIgnoreCase("-sa"))
+		selectAlgorithm = args[i + 1];
 
-        if (psmName.equalsIgnoreCase("incremental"))
-            psm = new GeDBIT.index.algorithms.IncrementalSelection(setA, setN);
-        else if (psmName.equalsIgnoreCase("pcaonfft"))
-            psm = new GeDBIT.index.algorithms.PCAOnFFT(fftScale);
-        else if (psmName.equalsIgnoreCase("selectiononfft"))
-            //������Ѳ����ȥ
-            psm = new GeDBIT.index.algorithms.SelectionOnFFT(fftScale, testKind, yMethod, selectAlgorithm);
-            //psm = new GeDBIT.index.algorithms.SelectionOnFFT(fftScale);
-        else if (psmName.equalsIgnoreCase("eigen"))
-            psm = new GeDBIT.index.algorithms.EigenOnFFT(fftScale);
-        else if (psmName.equalsIgnoreCase("gauss"))
-            psm = new GeDBIT.index.algorithms.GaussOnFFT(fftScale);
-        else
-            psm = PivotSelectionMethods.valueOf(psmName.toUpperCase());
-        
-//        String forPrint = Integer.toString(fftScale);
+	    else if (args[i].equalsIgnoreCase("-ym"))
+		yMethod = args[i + 1];
 
-        //bulk load all the files
-        batchBulkLoad(fileName, indexPrefix, dataType, dim, frag, initialSize, finalSize, stepSize, mls, pNum, sf, debug, pathLength, psm, dpm,
-                bucket, forPrint);
+	    else if (args[i].equalsIgnoreCase("-tkind"))
+		testKind = args[i + 1];
+	    else if (args[i].equalsIgnoreCase("-fftopt"))
+		PivotSelectionMethods.fftopt = Integer.parseInt(args[i + 1]);
+	    else if (args[i].equalsIgnoreCase("-rn"))
+		PartitionMethods.countRN = Integer.parseInt(args[i + 1]);
+
+	    else
+		throw new IllegalArgumentException("Invalid option " + args[i]);
+	}
+
+	dpm.setMaxRadius(maxR);
+
+	// hack, if cght, use clustering partition, and set maxr to -1 to denote
+	// it
+	if (dpm == PartitionMethods.CGHT) {
+	    dpm = PartitionMethods.CLUSTERINGKMEANS;
+	    dpm.setMaxRadius(-2);
+	}
+	if (dpm == PartitionMethods.GHT) {
+	    dpm = PartitionMethods.CLUSTERINGKMEANS;
+	    dpm.setMaxRadius(-1);
+	}
+
+	if (psmName.equalsIgnoreCase("incremental"))
+	    psm = new GeDBIT.index.algorithms.IncrementalSelection(setA, setN);
+	else if (psmName.equalsIgnoreCase("pcaonfft"))
+	    psm = new GeDBIT.index.algorithms.PCAOnFFT(fftScale);
+	else if (psmName.equalsIgnoreCase("selectiononfft"))
+	    // ������Ѳ����ȥ
+	    psm = new GeDBIT.index.algorithms.SelectionOnFFT(fftScale,
+		    testKind, yMethod, selectAlgorithm);
+	// psm = new GeDBIT.index.algorithms.SelectionOnFFT(fftScale);
+	else if (psmName.equalsIgnoreCase("eigen"))
+	    psm = new GeDBIT.index.algorithms.EigenOnFFT(fftScale);
+	else if (psmName.equalsIgnoreCase("gauss"))
+	    psm = new GeDBIT.index.algorithms.GaussOnFFT(fftScale);
+	else
+	    psm = PivotSelectionMethods.valueOf(psmName.toUpperCase());
+
+	// String forPrint = Integer.toString(fftScale);
+
+	// bulk load all the files
+	batchBulkLoad(fileName, indexPrefix, dataType, dim, frag, initialSize,
+		finalSize, stepSize, mls, pNum, sf, debug, pathLength, psm,
+		dpm, bucket, forPrint);
 
     }
 
@@ -258,152 +254,143 @@ public class BuildVPIndex
      * @param dpm
      * @param bucket
      */
-    public static void batchBulkLoad(String fileName, String indexPrefix, String dataType, int dim, int frag, int initialSize, int finalSize, int stepSize,
-            int mls, int pNum, int sf, Level debug, int pathLength, PivotSelectionMethod psm, PartitionMethod dpm, boolean bucket, String forPrint)
-    {
-        //statistics
-        double startTime, endTime;
-        final int indexNum = (finalSize - initialSize) / stepSize + 1;
-        double[] buildTimes = new double[indexNum];
-        int[] distCalNum = new int[indexNum];
+    public static void batchBulkLoad(String fileName, String indexPrefix,
+	    String dataType, int dim, int frag, int initialSize, int finalSize,
+	    int stepSize, int mls, int pNum, int sf, Level debug,
+	    int pathLength, PivotSelectionMethod psm, PartitionMethod dpm,
+	    boolean bucket, String forPrint) {
+	// statistics
+	double startTime, endTime;
+	final int indexNum = (finalSize - initialSize) / stepSize + 1;
+	double[] buildTimes = new double[indexNum];
+	int[] distCalNum = new int[indexNum];
 
-        for (int size = initialSize, i = 0; (size <= finalSize) & (i < indexNum); size += stepSize, i++)
-        {
-            String currentIndexPrefix = indexPrefix + "-" + size;
+	for (int size = initialSize, i = 0; (size <= finalSize)
+		& (i < indexNum); size += stepSize, i++) {
+	    String currentIndexPrefix = indexPrefix + "-" + size;
 
-            if (!removeFilesWithHeader(currentIndexPrefix + "."))
-            {
-                System.out.println("Can not remove old files!");
-                System.exit(-1);
-            }
+	    if (!removeFilesWithHeader(currentIndexPrefix + ".")) {
+		System.out.println("Can not remove old files!");
+		System.exit(-1);
+	    }
 
-            if (!removeFilesWithHeader(currentIndexPrefix + "-"))
-            {
-                System.out.println("Can not remove old files!");
-                System.exit(-1);
-            }
+	    if (!removeFilesWithHeader(currentIndexPrefix + "-")) {
+		System.out.println("Can not remove old files!");
+		System.exit(-1);
+	    }
 
-            Table table = null;
-            try
-            {
-                table = getTable(dataType, fileName, currentIndexPrefix, size, frag, dim);
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+	    Table table = null;
+	    try {
+		table = getTable(dataType, fileName, currentIndexPrefix, size,
+			frag, dim);
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
 
-            CountedMetric countMetric = new CountedMetric(table.getMetric());
+	    CountedMetric countMetric = new CountedMetric(table.getMetric());
 
-            if (debug != Level.OFF)
-                System.out.println(" building size:" + table.size() + "..., ");
+	    if (debug != Level.OFF)
+		System.out.println(" building size:" + table.size() + "..., ");
 
-            startTime = System.currentTimeMillis();
-            table.setMetric(countMetric);
+	    startTime = System.currentTimeMillis();
+	    table.setMetric(countMetric);
 
-            table.buildVPIndex(psm, pNum, dpm, sf, mls, pathLength, bucket, debug, forPrint);
+	    table.buildVPIndex(psm, pNum, dpm, sf, mls, pathLength, bucket,
+		    debug, forPrint);
 
-            endTime = System.currentTimeMillis();
+	    endTime = System.currentTimeMillis();
 
-            buildTimes[i] = (endTime - startTime) / 1000.00;
-            distCalNum[i] = countMetric.getCounter();
-            countMetric.clear();
-        }
+	    buildTimes[i] = (endTime - startTime) / 1000.00;
+	    distCalNum[i] = countMetric.getCounter();
+	    countMetric.clear();
+	}
 
-        //all indecies had been built, now out put the statistics.
-        System.out.println("Database size, building time(seconds), #distance calculation:");
-        for (int i = 0; i < indexNum; ++i)
-            System.out.println((initialSize + stepSize * i) + ", " + buildTimes[i] + ", " + distCalNum[i]);
+	// all indecies had been built, now out put the statistics.
+	System.out
+		.println("Database size, building time(seconds), #distance calculation:");
+	for (int i = 0; i < indexNum; ++i)
+	    System.out.println((initialSize + stepSize * i) + ", "
+		    + buildTimes[i] + ", " + distCalNum[i]);
     }
 
     /**
-     * remove all files with the given header, a utility method, not to be used by user.
-     * @param header header of file name, can have directory name, all files can be expressed as header* are deleted
+     * remove all files with the given header, a utility method, not to be used
+     * by user.
+     * 
+     * @param header
+     *            header of file name, can have directory name, all files can be
+     *            expressed as header* are deleted
      * @return true if runs successfully
      */
-    public static boolean removeFilesWithHeader(String header)
-    {
-        if (header == null)
-            return true;
+    public static boolean removeFilesWithHeader(String header) {
+	if (header == null)
+	    return true;
 
-        class HeaderFilter implements FileFilter
-        {
-            String header;
+	class HeaderFilter implements FileFilter {
+	    String header;
 
-            HeaderFilter(File f)
-            {
-                header = f.getAbsolutePath();
-            }
+	    HeaderFilter(File f) {
+		header = f.getAbsolutePath();
+	    }
 
-            public boolean accept(File pathName)
-            {
-                String input = pathName.getAbsolutePath();
-                return input.startsWith(header);
-            }
-        }
-        ;
+	    public boolean accept(File pathName) {
+		String input = pathName.getAbsolutePath();
+		return input.startsWith(header);
+	    }
+	}
+	;
 
-        File f = new File(header);
-        File parent = (new File(f.getAbsolutePath())).getParentFile();
-        //System.out.println("Parent:" + parent.getAbsolutePath() );
+	File f = new File(header);
+	File parent = (new File(f.getAbsolutePath())).getParentFile();
+	// System.out.println("Parent:" + parent.getAbsolutePath() );
 
-        File[] toDelete = parent.listFiles(new HeaderFilter(f));
-        if (toDelete == null)
-            return true;
-        
-        for (int i = 0; i < toDelete.length; i++)
-        {
-            if (!toDelete[i].delete())
-            {
-                System.out.println("Could not delete file:" + toDelete[i].getAbsolutePath());
-                return false;
-            }
-            //System.out.println("File: " + toDelete[i].getAbsolutePath() + " deleted.");
-        }
+	File[] toDelete = parent.listFiles(new HeaderFilter(f));
+	if (toDelete == null)
+	    return true;
 
-        return true;
+	for (int i = 0; i < toDelete.length; i++) {
+	    if (!toDelete[i].delete()) {
+		System.out.println("Could not delete file:"
+			+ toDelete[i].getAbsolutePath());
+		return false;
+	    }
+	    // System.out.println("File: " + toDelete[i].getAbsolutePath() +
+	    // " deleted.");
+	}
+
+	return true;
     }
 
-    public static Table getTable(String dataType, String fileName, String indexPrefix, int maxDataSize, int fragLength, int dim) throws IOException
-    {
-        Table table = null;
+    public static Table getTable(String dataType, String fileName,
+	    String indexPrefix, int maxDataSize, int fragLength, int dim)
+	    throws IOException {
+	Table table = null;
 
-        //TODO remove the null
-        if (dataType.equalsIgnoreCase("ms"))
-        {
-            table = new SpectraTable(fileName, indexPrefix, maxDataSize, null);
-        }
-        else if (dataType.equalsIgnoreCase("msms"))
-        {
-            table = new SpectraWithPrecursorMassTable(fileName, indexPrefix, maxDataSize);
-        }
-        else if (dataType.equalsIgnoreCase("dna"))
-        {
-            table = new DNATable(fileName, indexPrefix, maxDataSize, fragLength);
-        }
-        else if (dataType.equalsIgnoreCase("rna"))
-        {
-            table = new RNATable(fileName, indexPrefix, maxDataSize, fragLength);
-        }
-        else if (dataType.equalsIgnoreCase("protein"))
-        {
-            table = new PeptideTable(fileName, indexPrefix, maxDataSize, fragLength);
-        }
-        else if (dataType.equalsIgnoreCase("vector"))
-        {
-            table = new DoubleVectorTable(fileName, indexPrefix, maxDataSize, dim);
-        }
-        else if (dataType.equalsIgnoreCase("image"))
-        {
-            table = new ImageTable(fileName, indexPrefix, maxDataSize);
-        }else if(dataType.equalsIgnoreCase("string")){
-        table = new StringTable(fileName, indexPrefix, maxDataSize, new GeDBIT.dist.EditDistance());
-        }
-        else
-        {
-            throw new Error("Invalid dataType!");
-        }
-        return table;
+	// TODO remove the null
+	if (dataType.equalsIgnoreCase("ms")) {
+	    table = new SpectraTable(fileName, indexPrefix, maxDataSize, null);
+	} else if (dataType.equalsIgnoreCase("msms")) {
+	    table = new SpectraWithPrecursorMassTable(fileName, indexPrefix,
+		    maxDataSize);
+	} else if (dataType.equalsIgnoreCase("dna")) {
+	    table = new DNATable(fileName, indexPrefix, maxDataSize, fragLength);
+	} else if (dataType.equalsIgnoreCase("rna")) {
+	    table = new RNATable(fileName, indexPrefix, maxDataSize, fragLength);
+	} else if (dataType.equalsIgnoreCase("protein")) {
+	    table = new PeptideTable(fileName, indexPrefix, maxDataSize,
+		    fragLength);
+	} else if (dataType.equalsIgnoreCase("vector")) {
+	    table = new DoubleVectorTable(fileName, indexPrefix, maxDataSize,
+		    dim);
+	} else if (dataType.equalsIgnoreCase("image")) {
+	    table = new ImageTable(fileName, indexPrefix, maxDataSize);
+	} else if (dataType.equalsIgnoreCase("string")) {
+	    table = new StringTable(fileName, indexPrefix, maxDataSize,
+		    new GeDBIT.dist.EditDistance());
+	} else {
+	    throw new Error("Invalid dataType!");
+	}
+	return table;
     }
 
 }

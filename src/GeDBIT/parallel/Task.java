@@ -1,6 +1,5 @@
 package GeDBIT.parallel;
 
-public interface Task
-{
+public interface Task {
     public void execute();
 }

@@ -30,121 +30,117 @@ import java.nio.channels.FileChannel;
 import java.nio.MappedByteBuffer;
 
 /**
- * An implementation of AbstractBufferedFile that uses the NIO API to map
- * pages of the underlying file into memory.
- *
+ * An implementation of AbstractBufferedFile that uses the NIO API to map pages
+ * of the underlying file into memory.
+ * 
  * @author Tobias Downer
  */
 
 class NIOBufferedFile extends AbstractBufferedFile {
 
-  /**
-   * The FileChannel object.
-   */
-  private FileChannel access_file_channel;
+    /**
+     * The FileChannel object.
+     */
+    private FileChannel access_file_channel;
 
-  /**
-   * The mode of the mapped byte buffer.
-   */
-  private FileChannel.MapMode map_mode;
+    /**
+     * The mode of the mapped byte buffer.
+     */
+    private FileChannel.MapMode map_mode;
 
-  /**
-   * The current size of the file.
-   */
-  private long file_size;
-  
+    /**
+     * The current size of the file.
+     */
+    private long file_size;
 
-  /**
-   * The constructor.
-   */
-  public NIOBufferedFile(int unique_id, RandomAccessFile file, String mode,
-                         BufferManager manager) throws IOException {
-    super(unique_id, file, manager);
-    if (mode.equals("r")) {
-      map_mode = FileChannel.MapMode.READ_ONLY;
-    }
-    else if (mode.equals("rw")) {
-      map_mode = FileChannel.MapMode.READ_WRITE;
-    }
-    else {
-      throw new RuntimeException("Unrecognised access mode.");
-    }
-    file_size = file.length();
-    access_file_channel = file.getChannel();
-  }
-
-  // ---------- Implemented from AbstractBufferedFile ----------
-
-  public PageBuffer createPageFor(long position, int len) {
-    return new NIOPageBuffer(position, len);
-  }
-
-  public void sizeChange(long old_size, long new_size) throws IOException {
-    file_size = new_size;
-    // If the store has a page buffer created over the given area, we
-    // flush and reinitialize the page.
-    NIOPageBuffer page_buffer =
-                  (NIOPageBuffer) getPageFromCache((old_size - 1) / page_size);
-    if (page_buffer != null) {
-      page_buffer.flushImpl(-1, -1);
-      page_buffer.initImpl();
-    }
-  }
-
-  // ---------- Inner classes ----------
-
-  /**
-   * This implementation of a page buffer initializes the page by reading the
-   * page into a byte[] array in memory.
-   */
-  class NIOPageBuffer extends PageBuffer {
-    
-    private long position;
-    private int length;
-    private MappedByteBuffer buffer;
-
-    public NIOPageBuffer(long position, int length) {
-      this.position = position;
-      this.length = length;
+    /**
+     * The constructor.
+     */
+    public NIOBufferedFile(int unique_id, RandomAccessFile file, String mode,
+	    BufferManager manager) throws IOException {
+	super(unique_id, file, manager);
+	if (mode.equals("r")) {
+	    map_mode = FileChannel.MapMode.READ_ONLY;
+	} else if (mode.equals("rw")) {
+	    map_mode = FileChannel.MapMode.READ_WRITE;
+	} else {
+	    throw new RuntimeException("Unrecognised access mode.");
+	}
+	file_size = file.length();
+	access_file_channel = file.getChannel();
     }
 
-    public void initImpl() throws IOException {
-      int map_size = (int) Math.min(file_size - position, (long) length);
-      if (map_size < 0) {
-        System.out.println("length = " + length);
-        System.out.println("file_size = " + file_size);
-        System.out.println("position = " + position);
-      }
-      buffer = access_file_channel.map(map_mode, position, map_size);
+    // ---------- Implemented from AbstractBufferedFile ----------
+
+    public PageBuffer createPageFor(long position, int len) {
+	return new NIOPageBuffer(position, len);
     }
 
-    public byte readImpl(int position) {
-      return buffer.get(position);
+    public void sizeChange(long old_size, long new_size) throws IOException {
+	file_size = new_size;
+	// If the store has a page buffer created over the given area, we
+	// flush and reinitialize the page.
+	NIOPageBuffer page_buffer = (NIOPageBuffer) getPageFromCache((old_size - 1)
+		/ page_size);
+	if (page_buffer != null) {
+	    page_buffer.flushImpl(-1, -1);
+	    page_buffer.initImpl();
+	}
     }
 
-    public void readImpl(int position, byte[] b, int off, int len) {
-      buffer.position(position);
-      buffer.get(b, off, len);
-    }
+    // ---------- Inner classes ----------
 
-    public void writeImpl(int position, byte b) {
-      buffer.put(position, b);
-    }
+    /**
+     * This implementation of a page buffer initializes the page by reading the
+     * page into a byte[] array in memory.
+     */
+    class NIOPageBuffer extends PageBuffer {
 
-    public void writeImpl(int position, byte[] b, int off, int len) {
-      buffer.position(position);
-      buffer.put(b, off, len);
-    }
+	private long position;
+	private int length;
+	private MappedByteBuffer buffer;
 
-    public void flushImpl(int p1, int p2) throws IOException {
-      buffer.force();
-    }
+	public NIOPageBuffer(long position, int length) {
+	    this.position = position;
+	    this.length = length;
+	}
 
-    public void disposeImpl() {
-      buffer = null;
-    }
+	public void initImpl() throws IOException {
+	    int map_size = (int) Math.min(file_size - position, (long) length);
+	    if (map_size < 0) {
+		System.out.println("length = " + length);
+		System.out.println("file_size = " + file_size);
+		System.out.println("position = " + position);
+	    }
+	    buffer = access_file_channel.map(map_mode, position, map_size);
+	}
 
-  }
+	public byte readImpl(int position) {
+	    return buffer.get(position);
+	}
+
+	public void readImpl(int position, byte[] b, int off, int len) {
+	    buffer.position(position);
+	    buffer.get(b, off, len);
+	}
+
+	public void writeImpl(int position, byte b) {
+	    buffer.put(position, b);
+	}
+
+	public void writeImpl(int position, byte[] b, int off, int len) {
+	    buffer.position(position);
+	    buffer.put(b, off, len);
+	}
+
+	public void flushImpl(int p1, int p2) throws IOException {
+	    buffer.force();
+	}
+
+	public void disposeImpl() {
+	    buffer = null;
+	}
+
+    }
 
 }
-

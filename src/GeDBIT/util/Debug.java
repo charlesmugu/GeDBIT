@@ -12,16 +12,15 @@ package GeDBIT.util;
  * Allows debugging to be turned on or off at compiletime.
  * 
  * @author Rui Mao
- *
+ * 
  */
-public final class Debug
-{
-    
+public final class Debug {
+
     /**
      * Debug code.
      */
     public static final boolean debug = false;
-    
+
     /**
      * Record statistics.
      */

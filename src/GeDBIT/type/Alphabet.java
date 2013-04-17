@@ -12,49 +12,45 @@ import java.io.Serializable;
 
 /**
  * @author Willard
- *
+ * 
  */
 public class Alphabet implements Serializable {
     /**
      * 
      */
     private static final long serialVersionUID = -3200343173661145001L;
-   
+
     Symbol[] alphabet;
     int distinctSize;
-    
+
     /**
      * @param alphabet
      * @param distinctSize
      */
-    public Alphabet(Symbol [] alphabet, int distinctSize)
-    {
-        this.alphabet = alphabet;
-        this.distinctSize = distinctSize;
+    public Alphabet(Symbol[] alphabet, int distinctSize) {
+	this.alphabet = alphabet;
+	this.distinctSize = distinctSize;
     }
 
     /**
      * @return
      */
-    public int size()
-    {
-        return alphabet.length;
+    public int size() {
+	return alphabet.length;
     }
 
     /**
      * @param index
      * @return
      */
-    public Symbol get(int index)
-    {
-        return alphabet[index];
+    public Symbol get(int index) {
+	return alphabet[index];
     }
 
     /**
      * @return
      */
-    public int distinctSize()
-    {
-        return distinctSize;
+    public int distinctSize() {
+	return distinctSize;
     }
 }

@@ -28,92 +28,93 @@ import java.io.RandomAccessFile;
 import java.io.IOException;
 
 /**
- * An implementation of AbstractBufferedFile that implements a paging
- * strategy that copies pages from the underlying RandomAccessFile into
- * byte[] arrays in memeory.
- *
+ * An implementation of AbstractBufferedFile that implements a paging strategy
+ * that copies pages from the underlying RandomAccessFile into byte[] arrays in
+ * memeory.
+ * 
  * @author Tobias Downer
  */
 
 class IOBufferedFile extends AbstractBufferedFile {
 
-  /**
-   * The constructor.
-   */
-  public IOBufferedFile(int unique_id, RandomAccessFile file,
-                        BufferManager manager) {
-    super(unique_id, file, manager);
-  }
-
-  // ---------- Implemented from AbstractBufferedFile ----------
-
-  public PageBuffer createPageFor(long position, int len) {
-    return new IOPageBuffer(position, len);
-  }
-
-  public void sizeChange(long old_size, long new_size) throws IOException {
-    // This doesn't need to do anything for this implementation.
-  }
-
-  // ---------- Inner classes ----------
-
-  /**
-   * This implementation of a page buffer initializes the page by reading the
-   * page into a byte[] array in memory.
-   */
-  class IOPageBuffer extends PageBuffer {
-    
-    private long position;
-    private int length;
-    private byte[] buf;
-
-    public IOPageBuffer(long position, int length) {
-      this.position = position;
-      this.length = length;
+    /**
+     * The constructor.
+     */
+    public IOBufferedFile(int unique_id, RandomAccessFile file,
+	    BufferManager manager) {
+	super(unique_id, file, manager);
     }
 
-    public void initImpl() throws IOException {
-      buf = new byte[length];
-      synchronized (file) {
-      //added by Willard 2005.05.24 to compute statistics on how long it takes to read a page in from disk
-      	buffer_manager.addTime(System.currentTimeMillis());
-        // Read the page from the file into memory.
-        file.seek(position);
-        file.read(buf, 0, length);
-       //added by Willard 2005.05.24 to compute statistics on how long it takes to read a page in from disk
-        buffer_manager.addTime(System.currentTimeMillis());
-      }
+    // ---------- Implemented from AbstractBufferedFile ----------
+
+    public PageBuffer createPageFor(long position, int len) {
+	return new IOPageBuffer(position, len);
     }
 
-    public byte readImpl(int position) {
-      return buf[position];
+    public void sizeChange(long old_size, long new_size) throws IOException {
+	// This doesn't need to do anything for this implementation.
     }
 
-    public void readImpl(int position, byte[] b, int off, int len) {
-      System.arraycopy(buf, position, b, off, len);
-    }
+    // ---------- Inner classes ----------
 
-    public void writeImpl(int position, byte b) {
-      buf[position] = b;
-    }
+    /**
+     * This implementation of a page buffer initializes the page by reading the
+     * page into a byte[] array in memory.
+     */
+    class IOPageBuffer extends PageBuffer {
 
-    public void writeImpl(int position, byte[] b, int off, int len) {
-      System.arraycopy(b, off, buf, position, len);
-    }
+	private long position;
+	private int length;
+	private byte[] buf;
 
-    public void flushImpl(int p1, int p2) throws IOException {
-      synchronized (file) {
-        // Read the page from the file into memory.
-        file.seek(position + p1);
-        file.write(buf, p1, p2 - p1);
-      }
-    }
+	public IOPageBuffer(long position, int length) {
+	    this.position = position;
+	    this.length = length;
+	}
 
-    public void disposeImpl() {
-      buf = null;
-    }
+	public void initImpl() throws IOException {
+	    buf = new byte[length];
+	    synchronized (file) {
+		// added by Willard 2005.05.24 to compute statistics on how long
+		// it takes to read a page in from disk
+		buffer_manager.addTime(System.currentTimeMillis());
+		// Read the page from the file into memory.
+		file.seek(position);
+		file.read(buf, 0, length);
+		// added by Willard 2005.05.24 to compute statistics on how long
+		// it takes to read a page in from disk
+		buffer_manager.addTime(System.currentTimeMillis());
+	    }
+	}
 
-  }
+	public byte readImpl(int position) {
+	    return buf[position];
+	}
+
+	public void readImpl(int position, byte[] b, int off, int len) {
+	    System.arraycopy(buf, position, b, off, len);
+	}
+
+	public void writeImpl(int position, byte b) {
+	    buf[position] = b;
+	}
+
+	public void writeImpl(int position, byte[] b, int off, int len) {
+	    System.arraycopy(b, off, buf, position, len);
+	}
+
+	public void flushImpl(int p1, int p2) throws IOException {
+	    synchronized (file) {
+		// Read the page from the file into memory.
+		file.seek(position + p1);
+		file.write(buf, p1, p2 - p1);
+	    }
+	}
+
+	public void disposeImpl() {
+	    buf = null;
+	}
+
+    }
 
 }
-

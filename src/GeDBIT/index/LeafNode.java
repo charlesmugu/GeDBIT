@@ -26,7 +26,7 @@ abstract class LeafNode extends IndexNode {
     protected IndexObject[] children;
 
     public LeafNode() {
-        super();
+	super();
     }
 
     /**
@@ -37,43 +37,45 @@ abstract class LeafNode extends IndexNode {
      * @param size
      */
     protected LeafNode(IndexObject[] pivots, IndexObject[] children, int size) {
-        super(pivots, size);
-        if (children == null)
-            throw new IllegalArgumentException("LeafNode children cannot be null");
-        this.children = children;
+	super(pivots, size);
+	if (children == null)
+	    throw new IllegalArgumentException(
+		    "LeafNode children cannot be null");
+	this.children = children;
     }
 
     /**
      * @return the number of children.
      */
     int numChildren() {
-        return children.length;
+	return children.length;
     }
 
     /**
      * Return a distinct key value of children.
      * 
      * @param dataIndex
-     *        index of the distinct key value to be return
+     *            index of the distinct key value to be return
      * @return the key value
      */
     IndexObject getChild(int dataIndex) {
-        return children[dataIndex];
+	return children[dataIndex];
     }
 
     public void writeExternal(ObjectOutput out) throws IOException {
-        super.writeExternal(out);
-        out.writeInt(children.length);
-        for (int i = 0; i < children.length; i++) {
-            out.writeObject(children[i]);
-        }
+	super.writeExternal(out);
+	out.writeInt(children.length);
+	for (int i = 0; i < children.length; i++) {
+	    out.writeObject(children[i]);
+	}
     }
 
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        super.readExternal(in);
-        children = new IndexObject[in.readInt()];
-        for (int i = 0; i < children.length; i++) {
-            children[i] = (IndexObject) in.readObject();
-        }
+    public void readExternal(ObjectInput in) throws IOException,
+	    ClassNotFoundException {
+	super.readExternal(in);
+	children = new IndexObject[in.readInt()];
+	for (int i = 0; i < children.length; i++) {
+	    children[i] = (IndexObject) in.readObject();
+	}
     }
 }

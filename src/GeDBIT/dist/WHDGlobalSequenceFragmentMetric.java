@@ -26,29 +26,33 @@ public class WHDGlobalSequenceFragmentMetric extends SequenceFragmentMetric {
      * @param weightMatrix
      */
     public WHDGlobalSequenceFragmentMetric(WeightMatrix weightMatrix) {
-        super(weightMatrix);
+	super(weightMatrix);
     }
 
-    
-    /* (non-Javadoc)
-     * @see GeDBIT.dist.SequenceFragmentMetric#getDistance(GeDBIT.type.Fragment, GeDBIT.type.Fragment)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see GeDBIT.dist.SequenceFragmentMetric#getDistance(GeDBIT.type.Fragment,
+     * GeDBIT.type.Fragment)
      */
     public double getDistance(Fragment one, Fragment two) {
-        int firstSize;
-        if ((firstSize = one.size()) != two.size()) {
-            System.out.println("stop! Two fragments must have the same length");
-        }
-        double distance = 0.0;
-        for (int i = 0; i < firstSize; i++) {
-            distance += weightMatrix.getDistance(one.get(i), two.get(i));
-        }
-        return distance;
+	int firstSize;
+	if ((firstSize = one.size()) != two.size()) {
+	    System.out.println("stop! Two fragments must have the same length");
+	}
+	double distance = 0.0;
+	for (int i = 0; i < firstSize; i++) {
+	    distance += weightMatrix.getDistance(one.get(i), two.get(i));
+	}
+	return distance;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see GeDBIT.dist.SequenceFragmentMetric#getWeightMatrix()
      */
     public WeightMatrix getWeightMatrix() {
-        return weightMatrix;
+	return weightMatrix;
     }
 }

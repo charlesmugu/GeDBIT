@@ -21,8 +21,7 @@ import GeDBIT.index.TableManager;
  * @author Rui Mao, Willard
  * @version 2003.06.06
  */
-public class DoubleVector extends IndexObject
-{
+public class DoubleVector extends IndexObject {
     /**
      * 
      */
@@ -31,13 +30,12 @@ public class DoubleVector extends IndexObject
     /**
      * 
      */
-    Table                     table;
+    Table table;
 
     /** double array to store the data */
-    double[]                  data;
+    double[] data;
 
-    public DoubleVector()
-    {
+    public DoubleVector() {
     }
 
     /**
@@ -47,16 +45,14 @@ public class DoubleVector extends IndexObject
      * @param rowID
      * @param dataString
      */
-    public DoubleVector(Table table, int rowID, String dataString)
-    {
-        super(rowID);
-        this.table = table;
-        String[] row = dataString.split("\\s+");
-        data = new double[row.length];
-        for (int i = 0; i < row.length; i++)
-        {
-            data[i] = Double.parseDouble(row[i]);
-        }
+    public DoubleVector(Table table, int rowID, String dataString) {
+	super(rowID);
+	this.table = table;
+	String[] row = dataString.split("\\s+");
+	data = new double[row.length];
+	for (int i = 0; i < row.length; i++) {
+	    data[i] = Double.parseDouble(row[i]);
+	}
     }
 
     /**
@@ -66,29 +62,27 @@ public class DoubleVector extends IndexObject
      * @param data
      *            the double array containning all the elements. cannot be null
      */
-    public DoubleVector(Table table, int rowID, double[] data)
-    {
-        super(rowID);
-        if (data == null)
-            throw new IllegalArgumentException("null data constructing DoubleVector");
-        this.table = table;
-        this.data = (double[]) data.clone();
+    public DoubleVector(Table table, int rowID, double[] data) {
+	super(rowID);
+	if (data == null)
+	    throw new IllegalArgumentException(
+		    "null data constructing DoubleVector");
+	this.table = table;
+	this.data = (double[]) data.clone();
     }
 
     /**
      * @return the double array
      */
-    public double[] getData()
-    {
-        return data;
+    public double[] getData() {
+	return data;
     }
 
     /**
      * @return the dimension ( length) of the vector
      */
-    public int size()
-    {
-        return data.length;
+    public int size() {
+	return data.length;
     }
 
     /*
@@ -96,14 +90,12 @@ public class DoubleVector extends IndexObject
      * 
      * @see GeDBIT.type.IndexObject#expand()
      */
-    public IndexObject[] expand()
-    {
-        IndexObject[] dbO = new IndexObject[rowIDLength];
-        for (int i = 0; i < rowIDLength; i++)
-        {
-            dbO[i] = new DoubleVector(table, rowIDStart + i, data);
-        }
-        return dbO;
+    public IndexObject[] expand() {
+	IndexObject[] dbO = new IndexObject[rowIDLength];
+	for (int i = 0; i < rowIDLength; i++) {
+	    dbO[i] = new DoubleVector(table, rowIDStart + i, data);
+	}
+	return dbO;
     }
 
     /*
@@ -111,40 +103,36 @@ public class DoubleVector extends IndexObject
      * 
      * @see GeDBIT.type.IndexObject#compareTo(GeDBIT.type.IndexObject)
      */
-    public int compareTo(IndexObject oThat)
-    {
-        if (!(oThat instanceof DoubleVector))
-            throw new ClassCastException("not compatible");
-        return compareTo((DoubleVector) oThat);
+    public int compareTo(IndexObject oThat) {
+	if (!(oThat instanceof DoubleVector))
+	    throw new ClassCastException("not compatible");
+	return compareTo((DoubleVector) oThat);
     }
 
     /**
      * @param oThat
      * @return
      */
-    public int compareTo(DoubleVector oThat)
-    {
-        DoubleVector that = (DoubleVector) oThat;
-        if (this == that)
-            return 0;
+    public int compareTo(DoubleVector oThat) {
+	DoubleVector that = (DoubleVector) oThat;
+	if (this == that)
+	    return 0;
 
-        if (this.size() < that.size())
-            return -1;
-        else if (this.size() > that.size())
-            return 1;
-        else
-        {
-            for (int i = 0; i < this.size(); i++)
-            {
-                double double1 = data[i];
-                double double2 = that.data[i];
-                if (double1 < double2)
-                    return -1;
-                else if (double1 > double2)
-                    return 1;
-            }
-            return 0;
-        }
+	if (this.size() < that.size())
+	    return -1;
+	else if (this.size() > that.size())
+	    return 1;
+	else {
+	    for (int i = 0; i < this.size(); i++) {
+		double double1 = data[i];
+		double double2 = that.data[i];
+		if (double1 < double2)
+		    return -1;
+		else if (double1 > double2)
+		    return 1;
+	    }
+	    return 0;
+	}
     }
 
     /*
@@ -152,11 +140,10 @@ public class DoubleVector extends IndexObject
      * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
-    public boolean equals(Object that)
-    {
-        if (!(that instanceof DoubleVector))
-            return false;
-        return Arrays.equals(this.data, ((DoubleVector) that).data);
+    public boolean equals(Object that) {
+	if (!(that instanceof DoubleVector))
+	    return false;
+	return Arrays.equals(this.data, ((DoubleVector) that).data);
     }
 
     /*
@@ -165,15 +152,13 @@ public class DoubleVector extends IndexObject
      * @see java.lang.Object#hashCode()
      */
     // taken from Joshua Bloch's Effective Java
-    public int hashCode()
-    {
-        int result = 17;
-        for (int i = 0; i < data.length; i++)
-        {
-            long _long = Double.doubleToLongBits(data[i]);
-            result = 37 * result + (int) (_long ^ (_long >>> 32));
-        }
-        return result;
+    public int hashCode() {
+	int result = 17;
+	for (int i = 0; i < data.length; i++) {
+	    long _long = Double.doubleToLongBits(data[i]);
+	    result = 37 * result + (int) (_long ^ (_long >>> 32));
+	}
+	return result;
     }
 
     /*
@@ -181,14 +166,13 @@ public class DoubleVector extends IndexObject
      * 
      * @see java.lang.Object#toString()
      */
-    public String toString()
-    {
-        StringBuffer sb = new StringBuffer("[DoubleVector, length:");
-        sb.append(data.length).append(" data:").append(data[0]);
-        for (int i = 1; i < data.length; i++)
-            sb.append(", ").append(data[i]);
-        sb.append("]");
-        return sb.toString();
+    public String toString() {
+	StringBuffer sb = new StringBuffer("[DoubleVector, length:");
+	sb.append(data.length).append(" data:").append(data[0]);
+	for (int i = 1; i < data.length; i++)
+	    sb.append(", ").append(data[i]);
+	sb.append("]");
+	return sb.toString();
     }
 
     /*
@@ -196,16 +180,16 @@ public class DoubleVector extends IndexObject
      * 
      * @see java.io.Externalizable#readExternal(java.io.ObjectInput)
      */
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
-    {
-        super.readExternal(in);
-        data = new double[in.readInt()];
-        for (int i = 0; i < data.length; i++)
-        {
-            data[i] = in.readDouble();
-        }
-        String indexPrefix = (String) in.readObject();
-        table = TableManager.getTableManager(indexPrefix).getTable(in.readInt());
+    public void readExternal(ObjectInput in) throws IOException,
+	    ClassNotFoundException {
+	super.readExternal(in);
+	data = new double[in.readInt()];
+	for (int i = 0; i < data.length; i++) {
+	    data[i] = in.readDouble();
+	}
+	String indexPrefix = (String) in.readObject();
+	table = TableManager.getTableManager(indexPrefix)
+		.getTable(in.readInt());
     }
 
     /*
@@ -213,15 +197,13 @@ public class DoubleVector extends IndexObject
      * 
      * @see java.io.Externalizable#writeExternal(java.io.ObjectOutput)
      */
-    public void writeExternal(ObjectOutput out) throws IOException
-    {
-        super.writeExternal(out);
-        out.writeInt(data.length);
-        for (int i = 0; i < data.length; i++)
-        {
-            out.writeDouble(data[i]);
-        }
-        out.writeObject(table.getIndexPrefix());
-        out.writeInt(table.getTableLocation());
+    public void writeExternal(ObjectOutput out) throws IOException {
+	super.writeExternal(out);
+	out.writeInt(data.length);
+	for (int i = 0; i < data.length; i++) {
+	    out.writeDouble(data[i]);
+	}
+	out.writeObject(table.getIndexPrefix());
+	out.writeInt(table.getTableLocation());
     }
 }

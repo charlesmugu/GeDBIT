@@ -16,11 +16,15 @@ import GeDBIT.type.IndexObject;
 /**
  * 
  * @author Willard
- *
+ * 
  */
-public interface PartitionMethod
-{
-    PartitionResults partition(Metric metric, IndexObject[] pivots, List<? extends IndexObject> data, int numPartitions, int maxLS);
-    PartitionResults partition(Metric metric, IndexObject[] pivots, List<? extends IndexObject> data, int first, int size, int numPartitions, int maxLS);
+public interface PartitionMethod {
+    PartitionResults partition(Metric metric, IndexObject[] pivots,
+	    List<? extends IndexObject> data, int numPartitions, int maxLS);
+
+    PartitionResults partition(Metric metric, IndexObject[] pivots,
+	    List<? extends IndexObject> data, int first, int size,
+	    int numPartitions, int maxLS);
+
     void setMaxRadius(double R);
 }

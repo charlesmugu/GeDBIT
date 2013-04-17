@@ -15,34 +15,29 @@ import java.io.ObjectOutput;
  * 
  * @author Willard
  */
-public abstract class IndexObject implements Externalizable, Comparable<IndexObject>
-{
+public abstract class IndexObject implements Externalizable,
+	Comparable<IndexObject> {
     int rowIDStart;
     int rowIDLength;
 
-    public IndexObject()
-    {
+    public IndexObject() {
     }
 
-    public IndexObject(int rowID)
-    {
-        this.rowIDStart = rowID;
-        this.rowIDLength = 1;
+    public IndexObject(int rowID) {
+	this.rowIDStart = rowID;
+	this.rowIDLength = 1;
     }
 
-    public void setRowID(int rowID)
-    {
-        this.rowIDStart = rowID;
+    public void setRowID(int rowID) {
+	this.rowIDStart = rowID;
     }
 
-    public int getRowID()
-    {
-        return rowIDStart;
+    public int getRowID() {
+	return rowIDStart;
     }
 
-    public void setRowIDLength(int length)
-    {
-        rowIDLength = length;
+    public void setRowIDLength(int length) {
+	rowIDLength = length;
     }
 
     public abstract int size();
@@ -51,16 +46,15 @@ public abstract class IndexObject implements Externalizable, Comparable<IndexObj
 
     public abstract int compareTo(IndexObject oThat);
 
-    public void writeExternal(ObjectOutput out) throws IOException
-    {
-        out.writeInt(this.rowIDStart);
-        out.writeInt(this.rowIDLength);
+    public void writeExternal(ObjectOutput out) throws IOException {
+	out.writeInt(this.rowIDStart);
+	out.writeInt(this.rowIDLength);
     }
 
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
-    {
-        rowIDStart = in.readInt();
-        rowIDLength = in.readInt();
+    public void readExternal(ObjectInput in) throws IOException,
+	    ClassNotFoundException {
+	rowIDStart = in.readInt();
+	rowIDLength = in.readInt();
     }
 
 }

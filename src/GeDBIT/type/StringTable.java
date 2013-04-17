@@ -16,13 +16,12 @@ import GeDBIT.dist.Metric;
 /**
  * @author Rui Mao
  */
-public class StringTable extends Table
-{
+public class StringTable extends Table {
 
     /**
      * 
      */
-    private static final long   serialVersionUID = 7630078213101669086L;
+    private static final long serialVersionUID = 7630078213101669086L;
 
     /**
      * The first line of the file should have two integers, separated by white
@@ -36,11 +35,11 @@ public class StringTable extends Table
      *            number of data points to read
      * @throws IOException
      */
-    public StringTable(String fileName, String indexPrefix, int size, Metric metric) throws IOException
-    {
-        super(fileName, indexPrefix, size, metric);
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        loadData(reader, size);
+    public StringTable(String fileName, String indexPrefix, int size,
+	    Metric metric) throws IOException {
+	super(fileName, indexPrefix, size, metric);
+	BufferedReader reader = new BufferedReader(new FileReader(fileName));
+	loadData(reader, size);
     }
 
     /**
@@ -49,36 +48,33 @@ public class StringTable extends Table
      * @param dimNum
      * @throws IOException
      */
-    void loadData(BufferedReader reader, int maxSize) throws IOException
-    {
+    void loadData(BufferedReader reader, int maxSize) throws IOException {
 
-        String line;
-        ArrayList<Integer> originalRowIDsArrayList = new ArrayList<Integer>();
-        ArrayList<StringObject> strings = new ArrayList<StringObject>();
-        int numData = 0;
+	String line;
+	ArrayList<Integer> originalRowIDsArrayList = new ArrayList<Integer>();
+	ArrayList<StringObject> strings = new ArrayList<StringObject>();
+	int numData = 0;
 
-        line = reader.readLine();
-        if (line != null)
-            line = line.trim();
+	line = reader.readLine();
+	if (line != null)
+	    line = line.trim();
 
-        while (line != null && numData < maxSize)
-        {
-            originalRowIDsArrayList.add(numData, numData);
-            strings.add(new StringObject(this, numData, line));
+	while (line != null && numData < maxSize) {
+	    originalRowIDsArrayList.add(numData, numData);
+	    strings.add(new StringObject(this, numData, line));
 
-            line = reader.readLine();
-            if (line != null)
-                line = line.trim();
+	    line = reader.readLine();
+	    if (line != null)
+		line = line.trim();
 
-            numData++;
-        }
-        strings.trimToSize();
-        this.data = strings;
+	    numData++;
+	}
+	strings.trimToSize();
+	this.data = strings;
 
-        originalRowIDs = new int[originalRowIDsArrayList.size()];
-        for (int i = 0, e = originalRowIDsArrayList.size(); i < e; i++)
-        {
-            originalRowIDs[i] = originalRowIDsArrayList.get(i);
-        }
+	originalRowIDs = new int[originalRowIDsArrayList.size()];
+	for (int i = 0, e = originalRowIDsArrayList.size(); i < e; i++) {
+	    originalRowIDs[i] = originalRowIDsArrayList.get(i);
+	}
     }
 }

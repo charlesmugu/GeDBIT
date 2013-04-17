@@ -29,11 +29,13 @@ public class SpectraTable extends Table {
      * @param metric
      * @throws IOException
      */
-    public SpectraTable(String fileName, String indexPrefix, int maxSize, Metric metric) throws IOException {
-        super(fileName, indexPrefix, maxSize, metric);
+    public SpectraTable(String fileName, String indexPrefix, int maxSize,
+	    Metric metric) throws IOException {
+	super(fileName, indexPrefix, maxSize, metric);
 
-        BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(fileName));
-        loadData(reader, maxSize);
+	BufferedReader reader = new java.io.BufferedReader(
+		new java.io.FileReader(fileName));
+	loadData(reader, maxSize);
     }
 
     /**
@@ -41,48 +43,49 @@ public class SpectraTable extends Table {
      * @param maxSize
      */
     private void loadData(BufferedReader reader, int maxSize) {
-        String line;
-        ArrayList<Spectra> spectra = null;
-        System.out.println("Loading... ");
-        try {
-            // read sequences from file
-            line = reader.readLine(); // read the first line
-            if (line != null)
-                line = line.trim();
-            // get total rows from first line and allocate the ArrayList
-            int numSpectra = java.lang.Integer.parseInt(line);
-            spectra = new ArrayList<Spectra>(numSpectra);
-            originalRowIDs = new int[numSpectra];
+	String line;
+	ArrayList<Spectra> spectra = null;
+	System.out.println("Loading... ");
+	try {
+	    // read sequences from file
+	    line = reader.readLine(); // read the first line
+	    if (line != null)
+		line = line.trim();
+	    // get total rows from first line and allocate the ArrayList
+	    int numSpectra = java.lang.Integer.parseInt(line);
+	    spectra = new ArrayList<Spectra>(numSpectra);
+	    originalRowIDs = new int[numSpectra];
 
-            // read line byte line
-            line = reader.readLine();
-            if (line != null)
-                line = line.trim();
+	    // read line byte line
+	    line = reader.readLine();
+	    if (line != null)
+		line = line.trim();
 
-            int count = 0;
-            while (line != null && count < maxSize) {
-                if (count % 1000 == 0) {
-                    System.out.print(count + ".. ");
-                }
-                String[] row = line.split(" ", 2);
-                originalRowIDs[count] = new Integer(row[0]).intValue();
-                spectra.add(new Spectra(this, count, row[1]));
+	    int count = 0;
+	    while (line != null && count < maxSize) {
+		if (count % 1000 == 0) {
+		    System.out.print(count + ".. ");
+		}
+		String[] row = line.split(" ", 2);
+		originalRowIDs[count] = new Integer(row[0]).intValue();
+		spectra.add(new Spectra(this, count, row[1]));
 
-                line = reader.readLine();
-                if (line != null)
-                    line = line.trim();
-                count++;
-            }
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-            throw new java.lang.IllegalStateException("Error occured when reading ms file: "
-                    + reader + " error message returned: " + e.getMessage());
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            /* Ignore strings with invalid characters. */
-        }
-        spectra.trimToSize();
-        data = spectra;
+		line = reader.readLine();
+		if (line != null)
+		    line = line.trim();
+		count++;
+	    }
+	} catch (java.io.IOException e) {
+	    e.printStackTrace();
+	    throw new java.lang.IllegalStateException(
+		    "Error occured when reading ms file: " + reader
+			    + " error message returned: " + e.getMessage());
+	} catch (NumberFormatException e) {
+	    e.printStackTrace();
+	    /* Ignore strings with invalid characters. */
+	}
+	spectra.trimToSize();
+	data = spectra;
     }
 
 }

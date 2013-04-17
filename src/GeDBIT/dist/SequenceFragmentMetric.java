@@ -28,32 +28,34 @@ public abstract class SequenceFragmentMetric implements Metric {
      * @param weightMatrix
      */
     public SequenceFragmentMetric(WeightMatrix weightMatrix) {
-        this.weightMatrix = weightMatrix;
+	this.weightMatrix = weightMatrix;
     }
 
     /**
-     * @return the {@link WeightMatrix} used when computing the distance between two fragments using this metric.
+     * @return the {@link WeightMatrix} used when computing the distance between
+     *         two fragments using this metric.
      */
     public WeightMatrix getWeightMatrix() {
-        return weightMatrix;
+	return weightMatrix;
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see GeDBIT.dist.Metric#getDistance(GeDBIT.type.IndexObject, GeDBIT.type.IndexObject)
+     * @see GeDBIT.dist.Metric#getDistance(GeDBIT.type.IndexObject,
+     * GeDBIT.type.IndexObject)
      */
     public double getDistance(IndexObject one, IndexObject two) {
-        return getDistance((Fragment) one, (Fragment) two);
+	return getDistance((Fragment) one, (Fragment) two);
     }
 
     /**
      * Computes the distance between two {@link Fragment}s
      * 
      * @param one
-     *        the first {@link Fragment} to compute distance on
+     *            the first {@link Fragment} to compute distance on
      * @param two
-     *        the second {@link Fragment} to compute distance on
+     *            the second {@link Fragment} to compute distance on
      * @return the distance between the two {@link Fragment}s
      */
     public abstract double getDistance(Fragment one, Fragment two);

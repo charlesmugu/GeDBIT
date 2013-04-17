@@ -18,12 +18,14 @@ import GeDBIT.type.IndexObject;
  */
 public interface PivotSelectionMethod {
     /**
-     * @param metric        X
+     * @param metric
+     *            X
      * @param data
      * @param numPivots
      * @return
      */
-    int[] selectPivots(Metric metric, List<? extends IndexObject> data, final int numPivots);
+    int[] selectPivots(Metric metric, List<? extends IndexObject> data,
+	    final int numPivots);
 
     /**
      * @param metric
@@ -33,6 +35,6 @@ public interface PivotSelectionMethod {
      * @param numPivots
      * @return
      */
-    int[] selectPivots(Metric metric, List<? extends IndexObject> data, int first, int dataSize,
-            final int numPivots);
+    int[] selectPivots(Metric metric, List<? extends IndexObject> data,
+	    int first, int dataSize, final int numPivots);
 }

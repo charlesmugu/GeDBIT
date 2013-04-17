@@ -18,18 +18,16 @@ import GeDBIT.type.IndexObject;
 /**
  * @author Rui Mao, Willard
  */
-public class VPInternalNode extends InternalNode
-{
+public class VPInternalNode extends InternalNode {
     private static final long serialVersionUID = 2951629361525110954L;
 
-    private double[][]        lowerRange;
-    private double[][]        upperRange;
+    private double[][] lowerRange;
+    private double[][] upperRange;
 
-    public int            GHTDegree           = 0;
+    public int GHTDegree = 0;
 
-    public VPInternalNode()
-    {
-        super();
+    public VPInternalNode() {
+	super();
     }
 
     /**
@@ -42,23 +40,21 @@ public class VPInternalNode extends InternalNode
      * @param childAddress
      */
     public VPInternalNode(IndexObject[] pivots, double[][] lowerRange,
-            double[][] upperRange, int size, long[] childAddress)
-    {
-        this(pivots, lowerRange, upperRange, size, childAddress, 0);
+	    double[][] upperRange, int size, long[] childAddress) {
+	this(pivots, lowerRange, upperRange, size, childAddress, 0);
     }
 
     public VPInternalNode(IndexObject[] pivots, double[][] lowerRange,
-            double[][] upperRange, int size, long[] childAddress, int degree)
-    {
-        super(pivots, size, childAddress);
+	    double[][] upperRange, int size, long[] childAddress, int degree) {
+	super(pivots, size, childAddress);
 
-        if (lowerRange == null || upperRange == null)
-            throw new IllegalArgumentException(
-                    "lowerRange and upperRange distance arrays cannot be null");
+	if (lowerRange == null || upperRange == null)
+	    throw new IllegalArgumentException(
+		    "lowerRange and upperRange distance arrays cannot be null");
 
-        this.lowerRange = lowerRange;
-        this.upperRange = upperRange;
-        this.GHTDegree = degree;
+	this.lowerRange = lowerRange;
+	this.upperRange = upperRange;
+	this.GHTDegree = degree;
     }
 
     /**
@@ -69,13 +65,12 @@ public class VPInternalNode extends InternalNode
      * @return a 2-d array of the lower ranges (first row) and the upper ranges
      *         (second row) of the child to each pivot.
      */
-    public double[][] getChildPredicate(int childIndex)
-    {
-        double[][] result = new double[2][];
-        result[0] = lowerRange[childIndex];
-        result[1] = upperRange[childIndex];
+    public double[][] getChildPredicate(int childIndex) {
+	double[][] result = new double[2][];
+	result[0] = lowerRange[childIndex];
+	result[1] = upperRange[childIndex];
 
-        return result;
+	return result;
     }
 
     /*
@@ -83,28 +78,23 @@ public class VPInternalNode extends InternalNode
      * 
      * @see java.io.Externalizable#writeExternal(java.io.ObjectOutput)
      */
-    public void writeExternal(ObjectOutput out) throws IOException
-    {
-        super.writeExternal(out);
-        out.writeInt(lowerRange.length);
-        for (int i = 0; i < lowerRange.length; i++)
-        {
-            out.writeInt(lowerRange[i].length);
-            for (int j = 0; j < lowerRange[i].length; j++)
-            {
-                out.writeDouble(lowerRange[i][j]);
-            }
-        }
-        out.writeInt(upperRange.length);
-        for (int i = 0; i < upperRange.length; i++)
-        {
-            out.writeInt(upperRange[i].length);
-            for (int j = 0; j < upperRange[i].length; j++)
-            {
-                out.writeDouble(upperRange[i][j]);
-            }
-        }
-        out.writeInt(GHTDegree);
+    public void writeExternal(ObjectOutput out) throws IOException {
+	super.writeExternal(out);
+	out.writeInt(lowerRange.length);
+	for (int i = 0; i < lowerRange.length; i++) {
+	    out.writeInt(lowerRange[i].length);
+	    for (int j = 0; j < lowerRange[i].length; j++) {
+		out.writeDouble(lowerRange[i][j]);
+	    }
+	}
+	out.writeInt(upperRange.length);
+	for (int i = 0; i < upperRange.length; i++) {
+	    out.writeInt(upperRange[i].length);
+	    for (int j = 0; j < upperRange[i].length; j++) {
+		out.writeDouble(upperRange[i][j]);
+	    }
+	}
+	out.writeInt(GHTDegree);
     }
 
     /*
@@ -113,49 +103,39 @@ public class VPInternalNode extends InternalNode
      * @see java.io.Externalizable#readExternal(java.io.ObjectInput)
      */
     public void readExternal(ObjectInput in) throws IOException,
-            ClassNotFoundException
-    {
-        super.readExternal(in);
-        lowerRange = new double[in.readInt()][];
-        for (int i = 0; i < lowerRange.length; i++)
-        {
-            lowerRange[i] = new double[in.readInt()];
-            for (int j = 0; j < lowerRange[i].length; j++)
-            {
-                lowerRange[i][j] = in.readDouble();
-            }
-        }
-        upperRange = new double[in.readInt()][];
-        for (int i = 0; i < upperRange.length; i++)
-        {
-            upperRange[i] = new double[in.readInt()];
-            for (int j = 0; j < upperRange[i].length; j++)
-            {
-                upperRange[i][j] = in.readDouble();
-            }
-        }
-        this.GHTDegree = in.readInt();
+	    ClassNotFoundException {
+	super.readExternal(in);
+	lowerRange = new double[in.readInt()][];
+	for (int i = 0; i < lowerRange.length; i++) {
+	    lowerRange[i] = new double[in.readInt()];
+	    for (int j = 0; j < lowerRange[i].length; j++) {
+		lowerRange[i][j] = in.readDouble();
+	    }
+	}
+	upperRange = new double[in.readInt()][];
+	for (int i = 0; i < upperRange.length; i++) {
+	    upperRange[i] = new double[in.readInt()];
+	    for (int j = 0; j < upperRange[i].length; j++) {
+		upperRange[i][j] = in.readDouble();
+	    }
+	}
+	this.GHTDegree = in.readInt();
     }
 
-    public double[][] getLowerRange()
-    {
-        return lowerRange;
+    public double[][] getLowerRange() {
+	return lowerRange;
     }
 
-    public void setLowerRange(double[][] lowerRange)
-    {
-        this.lowerRange = lowerRange;
+    public void setLowerRange(double[][] lowerRange) {
+	this.lowerRange = lowerRange;
     }
 
-    public double[][] getUpperRange()
-    {
-        return upperRange;
+    public double[][] getUpperRange() {
+	return upperRange;
     }
 
-    public void setUpperRange(double[][] upperRange)
-    {
-        this.upperRange = upperRange;
+    public void setUpperRange(double[][] upperRange) {
+	this.upperRange = upperRange;
     }
-    
-    
+
 }

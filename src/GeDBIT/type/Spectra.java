@@ -20,7 +20,7 @@ import GeDBIT.util.Debug;
 
 /**
  * @author Smriti Ramakrishnan, Rui Mao, Willard
- *
+ * 
  */
 public class Spectra extends DoubleVector {
     private static final long serialVersionUID = -8300375927493085758L;
@@ -37,9 +37,9 @@ public class Spectra extends DoubleVector {
      * @param spectra
      */
     public Spectra(Table table, int rowID, String spectra) {
-        super(table, rowID, spectra);
-        // make sure query is sorted
-        sortAsc();
+	super(table, rowID, spectra);
+	// make sure query is sorted
+	sortAsc();
     }
 
     /**
@@ -48,37 +48,38 @@ public class Spectra extends DoubleVector {
      * @param spectra
      */
     public Spectra(Table table, int rowID, double[] spectra) {
-        super(table, rowID, spectra);
-        // make sure query is sorted
-        sortAsc();
+	super(table, rowID, spectra);
+	// make sure query is sorted
+	sortAsc();
     }
 
     /**
      * 
      */
     public void sortAsc() {
-        try {
-            Arrays.sort(data);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (Debug.debug) {
-            Logger.getLogger("GeDBIT.index").finer("Sorted Spectra = " + toString());
-        }
+	try {
+	    Arrays.sort(data);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	if (Debug.debug) {
+	    Logger.getLogger("GeDBIT.index").finer(
+		    "Sorted Spectra = " + toString());
+	}
     }
 
     /**
      * @return
      */
     public double getMin() {
-        return data[0];
+	return data[0];
     }
 
     /**
      * @return
      */
     public double getMax() {
-        return data[data.length - 1];
+	return data[data.length - 1];
     }
 
     /*
@@ -87,10 +88,10 @@ public class Spectra extends DoubleVector {
      * @see GeDBIT.type.DoubleVector#expand()
      */
     public IndexObject[] expand() {
-        IndexObject[] dbO = new IndexObject[rowIDLength];
-        for (int i = 0; i < rowIDLength; i++) {
-            dbO[i] = new Spectra(table, rowIDStart + i, data);
-        }
-        return dbO;
+	IndexObject[] dbO = new IndexObject[rowIDLength];
+	for (int i = 0; i < rowIDLength; i++) {
+	    dbO[i] = new Spectra(table, rowIDStart + i, data);
+	}
+	return dbO;
     }
 }

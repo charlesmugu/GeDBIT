@@ -18,6 +18,7 @@ import cern.colt.matrix.linalg.Algebra;
 @SuppressWarnings("deprecation")
 public class MDS {
     private static Algebra ag = new Algebra();
+
     /**
      * Use MSDJ to run MDS
      * 
