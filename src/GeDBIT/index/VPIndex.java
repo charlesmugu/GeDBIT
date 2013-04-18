@@ -600,18 +600,6 @@ public class VPIndex extends AbstractIndex {
 	result /= (task.size - numPivot);
 	System.out.println("R neighborhood: " + result);
 
-	// TODO Delete below
-	/*
-	 * System.out.print("low[][0]: "); for (int i = 0; i < lows.length; i++)
-	 * System.out.print(" " + lows[i][0]); System.out.println();
-	 * System.out.print("low[][1]: "); for (int i = 0; i < lows.length; i++)
-	 * System.out.print(" " + lows[i][1]); System.out.println();
-	 * System.out.print("high[][0]: "); for (int i = 0; i < highs.length;
-	 * i++) System.out.print(" " + highs[i][0]); System.out.println();
-	 * System.out.print("high[][1]: "); for (int i = 0; i < highs.length;
-	 * i++) System.out.print(" " + highs[i][1]); System.out.println();
-	 */
-
     }
 
     private long writeRootNode(LoadTask task) {
