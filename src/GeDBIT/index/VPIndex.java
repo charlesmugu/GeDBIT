@@ -47,6 +47,7 @@ public class VPIndex extends AbstractIndex {
 
     public transient int numLeaf;
     public transient int numInternal;
+    private transient int[] partitionSizes;
 
     /**
      * Builds an idex over the specified Table.
@@ -414,15 +415,18 @@ public class VPIndex extends AbstractIndex {
 		task.pivotHistoryList.add(pivots[i]);
 	    else
 		break;
-
 	}
 
 	PartitionResults partitionResults = pm.partition(metric, pivots,
 		task.compressedData, 0, (task.size - task.numPivots),
 		singlePivotFanout, maxLeafSize);
 
-	int childrenNumber = partitionResults.size();
+	partitionSizes = new int[partitionResults.size()];
+	// added by Kewei Ma
+	for (int i = 0; i < partitionResults.size(); i++)
+	    partitionSizes[i] = partitionResults.getPartition(i).size();
 
+	int childrenNumber = partitionResults.size();
 	// step 3. create an internal node, and save it to nodeList
 	task.node = partitionResults.getInternalNode();
 
@@ -527,15 +531,12 @@ public class VPIndex extends AbstractIndex {
     private void countRN(List<? extends IndexObject> data, LoadTask task,
 	    double r, String dpm) {
 
-	// number of points in r neighborhood
-	int rn = 0;
 	final double[][] lows = ((VPInternalNode) task.node).getLowerRange();
 	final double[][] highs = ((VPInternalNode) task.node).getUpperRange();
-
+	double result = 0;
 	// for all data except pivots
 	for (int i = 0; i < task.size - numPivot; i++) {
-	    // number of partitions to search
-	    int searchTimes = 0;
+	    double avgPTraveled = 0;
 	    // for all partitions
 	    for (int j = 0; j < lows.length; j++) {
 		boolean search = true;
@@ -546,11 +547,13 @@ public class VPIndex extends AbstractIndex {
 			// distance of current data point and current pivot
 			final double dist = metric.getDistance(data.get(i),
 				task.getPivots()[k]);
-			if (dist < lows[j][k] - r || dist > highs[j][k] + r) {
+			if (dist < lows[j][k] - r || dist > highs[j][k] + r)
 			    search = false;
-			    break;
-			}
+
 		    }
+		    if (true == search)
+			avgPTraveled += partitionSizes[j]
+				/ (double) (task.size - numPivot);
 		} else if ("CGHT".equalsIgnoreCase(dpm))// CGHT
 		{
 		    // d1 + d2
@@ -568,6 +571,9 @@ public class VPIndex extends AbstractIndex {
 			    || dist2 < lows[j][1] - r * 2
 			    || dist2 > highs[j][1] + r * 2)
 			search = false;
+		    if (true == search)
+			avgPTraveled += partitionSizes[j]
+				/ (double) (task.size - numPivot);
 
 		} else
 		// GHT
@@ -577,20 +583,23 @@ public class VPIndex extends AbstractIndex {
 			    task.getPivots()[0])
 			    - metric.getDistance(data.get(i),
 				    task.getPivots()[1]);
-		    if (dist < -2 * r || dist > 2 * r)
-			search = false;
-		}
-		if (true == search) {
-		    searchTimes++;
-		    if (2 <= searchTimes) {
-			rn++;
-			break;
-		    }
+		    if (dist >= -2 * r && dist <= 2 * r)
+			avgPTraveled += 1;
+		    else if (dist < -2 * r)
+			avgPTraveled += partitionSizes[0]
+				/ (double) (task.size - numPivot);
+		    else
+			avgPTraveled += partitionSizes[1]
+				/ (double) (task.size - numPivot);
+		    break;
 		}
 
 	    }
+	    result += avgPTraveled;
 	}
-	System.out.println("R neighborhood: " + rn);
+	result /= (task.size - numPivot);
+	System.out.println("R neighborhood: " + result);
+
 	// TODO Delete below
 	/*
 	 * System.out.print("low[][0]: "); for (int i = 0; i < lows.length; i++)
