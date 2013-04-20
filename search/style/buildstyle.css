@@ -1,0 +1,224 @@
+/* 建立索引树风格定义*/
+
+#container .content .build_form
+{
+color:white;
+margin-top:30px;
+margin-left:50px;
+float: left
+}
+
+#container .content .form_submit{
+	float:right;
+	position:relative;
+	cursor:pointer;
+	border-bottom-left-radius:3px;
+	border-top-left-radius:3px;
+	border-bottom-right-radius:3px;
+	border-top-right-radius:3px;
+	border:0px solid #000;
+	vertical-align:middle;
+	width:80px;
+	height:25px;
+	font-size:6px;
+	font-weight:600;
+	background:rgb(77, 141, 183);
+	color:white;
+	padding-left :2px;
+	padding-right:2px;
+}
+
+input {
+	vertical-align: middle;
+	margin: 0;
+	padding: 0
+}
+
+#container .content .label{
+	position : relative;
+	font-size:10px;
+	color:#f87a7a;
+	width:195px;
+	text-align:right;
+	}
+
+#container .content .build_title{
+	margin-left: 50px;
+	margin-top: 30px;
+	font-size: 13px;
+	color: white;
+}
+	
+#container .content .file_text {
+	float:left;
+	position:relative;
+	border-bottom-left-radius:3px;
+	border-top-left-radius:3px;
+	border:0px solid #000;
+	padding-left:10px;
+	width:90px;
+	height:25px;
+	font-size:16px;
+	border:none;
+	vertical-align:middle
+}
+#container .content .file_button {
+	float:left;
+	position:relative;
+	cursor:pointer;
+	border-bottom-right-radius:3px;
+	border-top-right-radius:3px;
+	border:0px solid #000;
+	vertical-align:middle;
+	width:60px;
+	height:25px;
+	font-size:6px;
+	font-weight:600;
+	background:#81B74D;
+	color:white;
+	padding-left :2px;
+	padding-right:2px;
+}
+#container .content .file_file {
+	position: absolute;
+	top: 120px;
+	left: 252px;
+	filter:alpha(opacity:0);
+	opacity: 0;
+	cursor:pointer;
+	border:0px solid #000;
+	vertical-align:middle;
+	width:160px;
+	height:25px
+}
+
+#container .content .data_type{
+	position: relative;
+	float: left;
+	border-bottom-right-radius:3px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-top-left-radius:3px;
+	vertical-align:middle;
+	width:160px;
+	height:25px
+	
+}
+#container .content .build_dpm{
+	position: relative;
+	float: left;
+	border-bottom-right-radius:3px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-top-left-radius:3px;
+	vertical-align:middle;
+	width:160px;
+	height:25px
+}
+#container .content .build_psm{
+	position: relative;
+	float: left;
+	border-bottom-right-radius:3px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-top-left-radius:3px;
+	vertical-align:middle;
+	width:160px;
+	height:25px
+}
+#container .content .build_f{
+	position: relative;
+	float: left;
+	border-bottom-right-radius:3px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-top-left-radius:3px;
+	border:0px solid #000;
+	width:160px;
+	height:25px;
+	font-size:16px;
+	border:none;
+	vertical-align:middle
+}
+#container .content .build_v{
+	position: relative;
+	float: left;
+	border-bottom-right-radius:3px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-top-left-radius:3px;
+	border:0px solid #000;
+	width:160px;
+	height:25px;
+	font-size:16px;
+	border:none;
+	vertical-align:middle
+}
+#container .content .build_m{
+	position: relative;
+	float: left;
+	border-bottom-right-radius:3px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-top-left-radius:3px;
+	border:0px solid #000;
+	width:160px;
+	height:25px;
+	font-size:16px;
+	border:none;
+	vertical-align:middle
+}
+#container .content .build_frag{
+	position: relative;
+	float: left;
+	border-bottom-right-radius:3px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-top-left-radius:3px;
+	border:0px solid #000;
+	width:160px;
+	height:25px;
+	font-size:16px;
+	border:none;
+	vertical-align:middle
+}
+#container .content .build_fft_scale{
+	position: relative;
+	float: left;
+	border-bottom-right-radius:3px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-top-left-radius:3px;
+	border:0px solid #000;
+	width:160px;
+	height:25px;
+	font-size:16px;
+	border:none;
+	vertical-align:middle
+}
+#container .content .build_dim{
+	position: relative;
+	float: left;
+	border-bottom-right-radius:3px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-top-left-radius:3px;
+	border:0px solid #000;
+	width:160px;
+	height:25px;
+	font-size:16px;
+	border:none;
+	vertical-align:middle
+}
+#container .content .adv_options_btn{
+	cursor:pointer;
+	float:left;
+	vertical-align:middle;
+}
+#container .content .fast_options_btn{
+	cursor:pointer;
+	float:left;
+	vertical-align:middle;
+}
+
+

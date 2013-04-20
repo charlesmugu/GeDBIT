@@ -1,3 +1,4 @@
 /.project
-/.settings/
-.class
+/.settings
+*.class
+/search/WEB-INF/classes
