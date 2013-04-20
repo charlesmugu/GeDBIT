@@ -51,11 +51,11 @@ padding-left:20px;
 {
 float:left;
 position:relative;
-width:400px;
+width:500px;
 margin:0px;
 padding:0px;
 height:150px;
-right:-40%;
+right:-35%;
 
 }
 #container .header .right .but_vector
@@ -97,10 +97,22 @@ background:#1F292D;
 cursor:pointer;
 }
 
+#container .header .right .but_upload
+{
+margin-top:30px;
+float:left;
+height:76px;
+width:76px;
+border-radius:100px;
+position:relative;
+margin-left:40px;
+cursor:pointer;
+}
+
 #container .header .right .pointer
 {
 margin-bottom:0px;
-right:288px;
+right:403px;
 margin-top:138px;
 float:left;
 height:12px;
@@ -260,4 +272,28 @@ border-radius:5px;
 .pickpic img:hover
 {
 	background:url('../image/gs.gif') no-repeat;
+}
+
+#container .content .build_left
+{
+display:none;
+float:left;
+width:35%;
+margin:0px;
+padding:0px;
+height:100%;
+background:#638CD6;
+position:relative;
+}
+
+#container .content .build_right
+{
+display:none;
+float:left;
+width:65%;
+margin:0px;
+padding:0px;
+height:100%;
+position:relative;
+background:#1F292D;
 }
