@@ -129,10 +129,11 @@ public class IncrementalSelection implements PivotSelectionMethod,
 	boolean[] isDuplicate = new boolean[size];
 	for (int i = 0; i < size; i++)
 	    isDuplicate[i] = false;
-	for (int i = 0; i < size - 1; i++) {
+	
+	for (int i = 0; i < size; i++) {
 	    if (isDuplicate[i])
 		continue;
-	    for (int j = i + 1; j < size; j++) {
+	    for (int j = i; j < size; j++) {
 		if (isDuplicate[j])
 		    continue;
 		if (metric.getDistance(data.get(i), data.get(j)) == 0)

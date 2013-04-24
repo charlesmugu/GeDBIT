@@ -100,7 +100,7 @@ public class BuildVPIndex {
 
 	int setA = 10000;
 	int setN = 50;
-	int fftScale = 100;
+	int fftScale = 30;
 	String indexPrefix = "vpindex";
 	// final String indexExtName = ".index";
 	String fileName = "1m.vector";
@@ -265,7 +265,7 @@ public class BuildVPIndex {
 	double[] buildTimes = new double[indexNum];
 	int[] distCalNum = new int[indexNum];
 
-	for (int size = initialSize, i = 0; (size <= finalSize)
+	for (int size = initialSize, i = 0; (size <= initialSize)
 		& (i < indexNum); size += stepSize, i++) {
 	    String currentIndexPrefix = indexPrefix + "-" + size;
 
