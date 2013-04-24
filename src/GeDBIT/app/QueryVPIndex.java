@@ -736,8 +736,6 @@ public class QueryVPIndex {
 		(lastQuery > allQuery.size()) ? allQuery.size() : lastQuery);
 	Iterator p = query2.iterator();
 	int queryCounter = -1;
-	@SuppressWarnings("unused")
-	int numResults = 0;
 	while (p.hasNext()) {
 	    queryCounter++;
 	    RangeQuery q = new RangeQuery((IndexObject) p.next(), radius,
@@ -748,7 +746,6 @@ public class QueryVPIndex {
 	    List<IndexObject> resultList = new ArrayList<IndexObject>();
 	    final double startTime = System.currentTimeMillis();
 	    VPRangeCursor cursor = (VPRangeCursor) index.search(q);
-
 	    while (cursor.hasNext()) {
 		IndexObject iObject = ((DoubleIndexObjectPair) cursor.next())
 			.getObject();
@@ -757,7 +754,6 @@ public class QueryVPIndex {
 		}
 		// print each result
 		resultList.add(iObject);
-		numResults++;
 	    }
 
 	    final double endTime = System.currentTimeMillis();
@@ -925,8 +921,6 @@ public class QueryVPIndex {
 		}
 
 	} // end of while for all queries
-	  // TODO delete below
-	  // System.out.println("numResults= " + numResults/querySize);
 
 	querySize = queryCounter + 1;
 	// System.out.println("query number=" + querySize);

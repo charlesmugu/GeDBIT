@@ -71,7 +71,6 @@ public class PCA {
 	double[] columnMean = new double[col];
 	for (int i = 0; i < col; i++)
 	    columnMean[i] = matrix.viewColumn(i).zSum() / row;
-
 	if (print)
 	    System.out.println("column means: "
 		    + new DenseDoubleMatrix1D(columnMean) + "\n");
@@ -1040,7 +1039,6 @@ public class PCA {
 	// each row is a pc, the first is the one with the largest eigenvalue.
 	double[] w = new double[dim + 1];
 	double sum2 = 0;
-
 	Random r = new Random();
 	for (int i = 0; i < dim; i++)
 	    w[i] += r.nextDouble() - 0.5;
@@ -1291,6 +1289,7 @@ public class PCA {
 	centerize(matrix);
 	DoubleMatrix2D data = matrix.viewDice();
 
+
 	// initialization
 	Random r = new Random();
 	double[][] CData = new double[dim][pcNum];
@@ -1320,7 +1319,6 @@ public class PCA {
 	result.viewPart(1, 0, dim, pcNum).assign(
 		alg.mult(C, evd.getV().viewColumnFlip()));
 	result.viewRow(0).assign(evd.getRealEigenvalues().viewFlip());
-
 	return result.viewDice();
     }
 
@@ -1331,7 +1329,6 @@ public class PCA {
 
 	// center the matrix
 	centerize(matrix);
-
 	// initialization
 	Random r = new Random();
 	double[][] CData = new double[dim][pcNum];

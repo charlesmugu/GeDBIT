@@ -12,6 +12,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 
 import GeDBIT.dist.Metric;
+
 import GeDBIT.parallel.GlobalIndexPrintTask;
 import GeDBIT.parallel.GlobalIndexWorkTask;
 import GeDBIT.parallel.Task;

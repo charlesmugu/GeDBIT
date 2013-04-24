@@ -75,10 +75,11 @@ public enum PivotSelectionMethods implements PivotSelectionMethod {
 	    isCenter[firstPivot] = true;
 
 	    int[] indices; // offsets of the pivots in the original data list
-	    if (2 > fftopt) // if fft == 2, then choose the third point got from
-			    // FFT as the second povit
+	    if (2 > fftopt)
 		indices = new int[numPivots];
 	    else
+		// if fft == 2, then choose the third point got from
+		// FFT as the second povit
 		indices = new int[numPivots + 1];
 
 	    indices[0] = firstPivot;
@@ -123,10 +124,11 @@ public enum PivotSelectionMethods implements PivotSelectionMethod {
 		int[] result = new int[returnSize];
 		System.arraycopy(indices, 0, result, 0, returnSize);
 		return result;
-	    } else if (2 > fftopt) // if fft == 2, then choose the third point
-				   // got from FFT as the second povit
+	    } else if (2 > fftopt)
 		return indices;
 	    else {
+		// if fft == 2, then choose the third point
+		// got from FFT as the second pivot
 		int[] reindecs = { 0, 0 };
 		reindecs[0] = indices[0];
 		reindecs[1] = indices[2];
@@ -333,7 +335,7 @@ public enum PivotSelectionMethods implements PivotSelectionMethod {
 	}
     },
     EPCAF {
-	final int FFTScale = 10;
+	final int FFTScale = 30;
 
 	final int NumPCScale = 2;
 

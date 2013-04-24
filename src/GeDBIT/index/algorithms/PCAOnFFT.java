@@ -35,12 +35,10 @@ public class PCAOnFFT implements PivotSelectionMethod, java.io.Serializable {
     public int[] selectPivots(Metric metric, List<? extends IndexObject> data,
 	    int numPivots) {
 	final int dataSize = data.size();
-
 	if (numPivots >= dataSize) {
 	    int[] pivots = new int[dataSize];
 	    for (int i = 0; i < dataSize; i++)
 		pivots[i] = i;
-
 	    return IncrementalSelection.removeDuplicate(metric, data, pivots);
 	}
 
@@ -77,7 +75,6 @@ public class PCAOnFFT implements PivotSelectionMethod, java.io.Serializable {
 	/*
 	 * if (dataSize <10) { System.out.println(matrix); }
 	 */
-
 	// compute PCA with EM method
 	try {
 	    matrix = GeDBIT.index.algorithms.PCA.EMPCA(matrix, numPivots);
@@ -98,13 +95,12 @@ public class PCAOnFFT implements PivotSelectionMethod, java.io.Serializable {
 		return pivots;
 	    }
 	}
-
+	
 	// select pivots from the pca result
 	int[] result = GeDBIT.index.algorithms.PCA
 		.pivotSelectionByPCAResultAngle(matrix, numPivots);
 	for (int i = 0; i < result.length; i++)
 	    result[i] = fftResult[result[i]];
-
 	return result;
     }
 
