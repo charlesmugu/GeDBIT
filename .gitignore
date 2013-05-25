@@ -2,3 +2,4 @@
 /.settings
 *.class
 /search/WEB-INF/classes
+/search/file.xml
