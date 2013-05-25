@@ -17,5 +17,13 @@
 		<action  name="vector"  class="GeDBIT.web.VectorAction" >  
 			<result  name="success">/vector.jsp</result>
 		</action>
+		
+		<action name="buildindex" class="GeDBIT.web.BuildIndex">
+			<result name="success">/message.jsp</result>
+		</action>
     </package> 
+    
+
+
+
 </struts>  

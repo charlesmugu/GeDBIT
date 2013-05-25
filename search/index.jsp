@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -95,7 +95,25 @@ $(document).ready(function(){
 	$(".build_left").fadeIn(1000);
 	$(".build_right").fadeIn(1000);
   });
- 
+
+$("#fast_data_type").bind("change",function(){
+<!-- 将fast_data_type的值传递给data_type,并通过fast_data_type的值判定dimension以及fragment的显示以及初始值 -->	
+	var fast_data_type = document.getElementById("fast_data_type"); 
+	$("#data_type").val(fast_data_type.options[fast_data_type.selectedIndex].value);
+	if(fast_data_type.options[fast_data_type.selectedIndex].value=="dna"){
+		$("#build_frag").val(18);
+		$("#build_dim").val(""); 
+	}
+	else if(fast_data_type.options[fast_data_type.selectedIndex].value=="protein"){
+		$("#build_frag").val(6);
+		$("#build_dim").val("");
+		}
+	else if(fast_data_type.options[fast_data_type.selectedIndex].value=="vector"){
+		$("#build_frag").val("");
+		$("#build_dim").val(2); 
+	}
+});
+  
 <!-- data_type的select项控制维度或者分段长度的显示 -->
 var data_type_selection = {"protein":"build_frag_row","dna":"build_frag_row","vector":"build_dim_row"};
 $("#data_type").bind("change",function(){
@@ -114,6 +132,22 @@ $("#data_type").bind("change",function(){
 	else{
 		$("#build_frag").val("");
 		$("#build_dim").val(2); 
+	}
+
+<!-- 将data_type的值传递给fast_data_type,并通过data_type的值判定dimension以及fragment的默认值 -->
+	var data_type = document.getElementById("data_type"); 
+	$("#fast_data_type").val(data_type.options[data_type.selectedIndex].value);	
+	if(data_type.options[data_type.selectedIndex].value=="dna"){
+		$("#build_frag").val(18);
+		$("#build_dim").val(""); 
+	}
+	else if(data_type.options[data_type.selectedIndex].value=="protein"){
+		$("#build_frag").val(6);
+		$("#build_dim").val(""); 
+		}
+	else if(data_type.options[data_type.selectedIndex].value=="vector"){
+		$("#build_frag").val("");
+		$("#build_dim").val(2);  
 	}	
 });
 <!-- 根据PSM的值决定Fft Scale栏的值以及是否显示 -->
@@ -247,7 +281,7 @@ $("#fast_options_btn").click(function(){
 
 });
 </script>
-<title>基于非线性降维的通用搜索引擎(Demo)</title>
+<title>GeDBIT通用搜索引擎</title>
 </head>
 <body>
 <div id="container">
@@ -255,7 +289,7 @@ $("#fast_options_btn").click(function(){
 		<div class="row">
 		<div class="left">
 			<div class="til">
-			<h1>基于非线性降维的通用搜索引擎</h1>
+			<h1>GeDBIT通用搜索引擎</h1>
 			<!--<input type="button" class="but_build" value="上传数据" style="cursor:pointer;float: right;border-bottom-left-radius:3px;border-top-left-radius:3px;border-bottom-right-radius:3px;border-top-right-radius:3px;border:0px solid #000;vertical-align:top;width:130px;height:37px;font-size:22px;font-weight:600;background:#81B74D;color:white"> -->
 			</div>
 		</div>
@@ -275,13 +309,14 @@ $("#fast_options_btn").click(function(){
 		</div>
 		<div class="vector_right">
 			<div class="lab">
-				<h1>向量搜索</h1>
 				<h1>Vector</h1>
-				<p>在这里进行向量的搜索..格式 <strong style="font-size:18px;color:#f87a7a">x,y,z,radian</strong> </p>
+                <br>
+                <br>
+				<p><strong style="font-size:16px;color:#f87a7a"> Example:&nbsp;x,&nbsp;y,&nbsp;z,&nbsp;radian</strong> </p>
 			</div>
 			
 			<form class="" id="" action="vector.action" style="position:relative;text-align:left;margin-left:50px">
-				<input type="text" name="xyz" value="2,2,2,0.2" style="border-bottom-left-radius:3px;border-top-left-radius:3px;border:0px solid #000;padding-left:10px;width:400px;height:35px;font-size:16px;border:none;vertical-align:middle"/><input type="submit" value="搜索" style="cursor:pointer;border-bottom-right-radius:3px;border-top-right-radius:3px;border:0px solid #000;vertical-align:middle;width:130px;height:37px;font-size:22px;font-weight:600;background:#81B74D;color:white" />
+				<input type="text" name="xyz" value="0.03,0.62,0.96,0.2" style="border-bottom-left-radius:3px;border-top-left-radius:3px;border:0px solid #000;padding-left:10px;width:400px;height:35px;font-size:16px;border:none;vertical-align:middle"/><input type="submit" value="Search" style="cursor:pointer;border-bottom-right-radius:3px;border-top-right-radius:3px;border:0px solid #000;vertical-align:middle;width:130px;height:37px;font-size:22px;font-weight:600;background:#81B74D;color:white" />
 			</form>
 		</div>
 		<div class="dna_left">
@@ -290,10 +325,10 @@ $("#fast_options_btn").click(function(){
 		<div class="dna_right">
 		<div class="dna_query">
 			<div class="lab">
-				<h1>DNA序列搜索</h1>
 				<h1>DNA Sequence</h1>
-				<p>在这里进行DNA的搜索..一些搜索格式介绍</p>
-				<p> <strong  style="font-size:18px;color:#f87a7a">dna,radian</strong></p>
+                <br>
+                <br>
+				<p> <strong  style="font-size:16px;color:#f87a7a">Example:&nbsp;dna,&nbsp;radian</strong></p>
 			</div>
 			
 			<form action="dna.action" style="position:relative;text-align:left;margin-left:50px">
@@ -308,10 +343,10 @@ $("#fast_options_btn").click(function(){
 		</div>
 		<div class="pro_right">
 			<div class="lab">
-				<h1>蛋白质搜索</h1>
 				<h1>Protein</h1>
-				<p>在这里进行蛋白质的搜索..一些搜索格式介绍</p>
-				<p> <strong style="font-size:18px;color:#f87a7a">protein,radian</strong></p>
+                <br>
+                <br>
+				<p> <strong style="font-size:18px;color:#f87a7a">Example:&nbsp;protein,&nbsp;radian</strong></p>
 			</div>
 			
 			<form action="protein.action" style="position:relative;text-align:left;margin-left:50px">
@@ -327,7 +362,7 @@ $("#fast_options_btn").click(function(){
 			<h1>BUILD INDEX</h1>
 		</div>
 	  	<div class="build_form">
-			<form action="" method="post">
+			<form action="buildindex.action" method="POST" >
 				<table >
 					<tr id="build_file_row"><td class="label">Data:  </td>
 						<td class="dna_file_box">
@@ -336,7 +371,7 @@ $("#fast_options_btn").click(function(){
 							<input type="file" name="fileField" id="fileField" class="file_file"  onchange="javascript:document.getElementById('textfield').value=this.value;"/></td></tr>
 					<tr id="fast_data_type_row"><td class="label">Type:</td>
 						<td >
-							<select class="data_type" id="fast_data_type" onChange="change(this.value)">
+							<select name="data_type" class="data_type" id="fast_data_type" onChange="change(this.value)">
 								<option value="protein">Protein</option> 
 								<option value="dna">DNA</option> 
 								<option value="vector">Vector</option>
@@ -356,7 +391,7 @@ $("#fast_options_btn").click(function(){
 						<td ><input type='text' name='build_dim' id='build_dim' class='build_dim' /></td></tr>
 					<tr id="build_dpm_row"><td class="label">Partition Method:</td>
 						<td >
-							<select class="build_dpm" id="build_dpm"> 
+							<select name="build_dpm" class="build_dpm" id="build_dpm"> 
 								<option value="mvpt" selected=true >MVPT</option> 
 								<option value="cght" >CGHT</option> 
 								<option value="ght" >GHT</option>
@@ -367,7 +402,7 @@ $("#fast_options_btn").click(function(){
 						<td ><input type='text' name='build_m' id='build_m' class='build_m' value=100 /></td></tr>
 					<tr id="build_psm_row"><td class="label">Pivot Selection Method:</td>
 						<td >
-							<select class="build_psm" id="build_psm"> 
+							<select class="build_psm" id="build_psm" name="build_psm"> 
 								<option value="fft" selected=true >FFT</option> 
 								<option value="pca">PCA</option> 
 								<option value="lle">LLE</option>

@@ -81,7 +81,7 @@ input {
 }
 #container .content .file_file {
 	position: absolute;
-	top: 120px;
+	top: 100px;
 	left: 252px;
 	filter:alpha(opacity:0);
 	opacity: 0;
